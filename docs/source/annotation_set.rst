@@ -3,8 +3,6 @@ Annotation Set
 
 .. _annotation-set:
 
-Overview
---------
 An Annotation Set partitions a Coordinate Space into labeled regions (masks, meshes) using a specific Terminology. It is versioned; new versions capture refinements, added regions, or structural corrections.
 
 Directory Structure

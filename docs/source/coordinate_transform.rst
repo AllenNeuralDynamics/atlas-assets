@@ -3,8 +3,6 @@ Coordinate Transform
 
 .. _coordinate-transform:
 
-Overview
---------
 A Coordinate Transform asset defines one or more mathematical operations that map physical coordinates from a source Template to a target Template. Transforms can be directional (source → target) or bidirectional (both directions with validated inverses).
 
 Typical use cases:

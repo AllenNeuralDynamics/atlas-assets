@@ -3,8 +3,6 @@ Terminology
 
 .. _terminology:
 
-Overview
---------
 Terminology assets define the controlled vocabulary (taxonomy or ontology) used to label anatomical annotations in an atlas. A terminology release is versioned and immutable once published.
 
 See core concept description under the Terminology section on the main index page for high-level background.

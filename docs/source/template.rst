@@ -3,8 +3,6 @@ Template
 
 .. _template:
 
-Overview
---------
 A Template is the reference image that defines (or is rigidly/affinely aligned to) a Coordinate Space. It serves as the anatomical backdrop for annotation, registration, and visualization.
 
 Directory Structure
