@@ -73,7 +73,7 @@ For implementation details (files, naming, versioning) see :doc:`annotation_set`
 Terminology
 -----------
 
-A parcellation terminology is a versioned release set of terms that can be used to label annotations in an atlas, providing human readability and context and allowing communication about brain locations and structural properties. Typically, a terminology is a set of descriptive anatomical terms following a specific naming convention and/or approach to organization scheme. The terminology may be a flat list of controlled vocabulary, a taxonomy and partonomy, or an ontology (ref: ILX:0777107, RRID:SCR_023499).
+A parcellation terminology is a versioned release of a set of terms that can be used to label annotations in an atlas, providing human readability and context and enabling communication about brain locations and structural properties. Typically, a terminology is a set of descriptive anatomical terms following a specific naming convention and/or organizational approach. The terminology may be a flat list (controlled vocabulary), a taxonomy and partonomy, or an ontology (ref: ILX:0777107, RRID:SCR_023499).
 
 .. seealso::
    https://brain-bican.github.io/models/ParcellationTerminology/
