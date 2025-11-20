@@ -53,13 +53,14 @@ CSV Schema
 Columns (order recommended):
 
 * ``identifier`` – Stable unique string or integer ID for the node.
-* ``parent_identifier`` – Identifier of parent node (blank / null / self for root; pick one convention and keep consistent).
+* ``parent_identifier`` – Identifier of parent node (blank for root).
 * ``annotation_value`` – Integer value used in annotation volumes/maps corresponding to this structure; MUST be unique when not null.
 * ``name`` – Full human-readable structure name (Title Case preferred).
 * ``abbreviation`` – Short uppercase or mixed-case code (unique within the terminology scope).
-* ``color_hex_triplet`` – Six hexadecimal digits (``RRGGBB``) without ``#`` unless otherwise defined; represents display color.
-* ``descendant_identifiers`` – (OPTIONAL) Delimited list (``;`` recommended) of all descendant ``identifier`` values; a denormalization for rapid queries.
+* ``color_hex_triplet`` – Six hexadecimal digits prefixed with ``#`` (``#RRGGBB``); represents display color.
+* ``descendant_identifiers`` – (OPTIONAL) Delimited list of all descendant ``identifier`` values; a denormalization for rapid queries.
 * ``descendant_annotation_values`` – (OPTIONAL) Delimited list of all descendant ``annotation_value`` integers.
+* ``root_identifier_path`` - (OPTIONAL) Delimited list of ancestor ``identifier`` values from root to self.
 
 Validation Rules
 ----------------
