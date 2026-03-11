@@ -14,8 +14,8 @@ Directory Structure
          └── <version>/
              ├── data_description.json (REQUIRED)
              ├── processing.json       (REQUIRED IF COMPUTED)
-             ├── anatomical_template.ome.zarr (REQUIRED)
-             └── anatomical_template.nii.gz   (OPTIONAL)
+             ├── template.ome.zarr (REQUIRED)
+             └── template_{resolution}.nii.gz   (OPTIONAL)
 
 Naming Convention
 -----------------
@@ -28,13 +28,12 @@ Examples:
 
 Files
 -----
-``anatomical_template.ome.zarr``
+``template.ome.zarr``
   * OME-Zarr 0.5
-  * Array name: ``anatomical_template``
   * Coordinate transforms + orientation present
   * Millimeter units
 
-``anatomical_template.nii.gz``
+``template.nii.gz``
   * Millimeter units
   * Correct affine orientation (RAS recommended)
 
