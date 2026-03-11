@@ -116,8 +116,8 @@ The S3 bucket structure is organized as follows:
    │       └── <version>/
    │           ├── data_description.json (REQUIRED)
    │           ├── processing.json (REQUIRED IF COMPUTED)
-   │           ├── anatomical_template.ome.zarr (REQUIRED)
-   │           └── anatomical_template.nii.gz (OPTIONAL)
+   │           ├── template.ome.zarr (REQUIRED)
+   │           └── template.nii.gz (OPTIONAL)
    │
    ├── annotation-sets/
    │   └── <annotation_set_name>/
@@ -128,7 +128,7 @@ The S3 bucket structure is organized as follows:
    │           ├── masks_flat.nii.gz (OPTIONAL)
    │           ├── meshes.precomputed (REQUIRED)
    │           ├── meshes_smooth.precomputed (OPTIONAL)
-   │           └── parcellation.csv (REQUIRED)
+   │           └── parcellation_volumes.csv (OPTIONAL)
    │
    ├── terminologies/
    │   └── <terminology_name>/

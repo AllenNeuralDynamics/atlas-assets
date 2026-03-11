@@ -13,11 +13,11 @@ Directory Structure
      └── <annotation_set_name>/
          └── <version>/
              ├── data_description.json.         (REQUIRED)
-             ├── annotation.ome.zarr            (REQUIRED)
-             ├── annotation_compressed.ome.zarr (REQUIRED)
-             ├── annotation.precomputed         (REQUIRED)
-             ├── annotation_smooth.precomputed  (OPTIONAL)
-             ├── parcellation.csv               (REQUIRED)
+             ├── annotations.ome.zarr            (REQUIRED)
+             ├── annotations_compressed.ome.zarr (OPTIONAL)
+             ├── annotations.precomputed         (REQUIRED)
+             ├── annotations_smooth.precomputed  (OPTIONAL)
+             ├── parcellation_volumes.csv        (OPTIONAL)
              └── manifest.json                  (REQUIRED)
 
 Naming Convention
@@ -28,31 +28,30 @@ Example: ``allen-adult-mouse-annotation``
 
 Files
 -----
-``masks.ome.zarr``
+``annotations.ome.zarr``
   * OME-Zarr 0.5 multiscale
   * Correct coordinate transforms
   * Units in millimeters
-  * Dimensions: ``XYZA`` (A = annotation label dimension)    
+  * Dimensions: ``AZYX`` (A = annotation label dimension)    
 
-``masks_compressed.ome.zarr``
-  * Single integer label per voxel variant of ``masks`` array.
+``annotations_compressed.ome.zarr``
+  * Single integer label per voxel variant of ``annotations`` array.
   * OME-Zarr 0.5 multiscale
   * Correct coordinate transforms
-  * Array name: ``masks_compressed``
-  * Dimensions: ``XYZ``
+  * Dimensions: ``ZYX``
   s (millimeters)
 
-``annotation.precomputed``
+``annotations.precomputed``
   * stores compressed masks in Neuroglancer precomputed format
   * stores meshes in either legacy or sharded multiscale format
   * includes segment properties with name and abbreviation of annotation
 
-``annotation_smooth.precomputed``
+``annotations_smooth.precomputed``
   * Smoothed version of meshes for visualization-only
 
-``parcellation.csv``
-  * Exclicit mapping between ``annotation_value`` and terminology identifiers 
-  * Columns: ``annotation value``, ``terminology_label``
+``parcellation_volumes.csv``
+  * Document the volume of annotation for each identifier.
+  * Columns: ``identifier``, ``voxel_count``, ``volume_mm3``
 
 ``manifest.json``
   * References terminology name/version & coordinate space version; including component paths
