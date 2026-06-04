@@ -84,17 +84,17 @@ A parcellation terminology is a versioned release of a set of terms that can be 
 
 For implementation details (directory layout, file schema, validation rules) see :doc:`terminology`.
 
-Coordinate Transform
---------------------
+Coordinate Transformation
+-------------------------
 
 One or more concatenated mathematical operations that convert the physical coordinates of one template to another.
 
 .. note::
    This is not part of the existing BICAN data model.
 
-**Practically:** transforms, including nonlinear warps, defined specifically enough that we can map coordinates between anatomical spaces without secret code.
+**Practically:** transformations, including nonlinear warps, defined specifically enough that we can map coordinates between anatomical spaces without secret code.
 
-For implementation details (naming, files, validation rules) see :doc:`coordinate_transform`.
+For implementation details (naming, files, validation rules) see :doc:`coordinate_transformation`.
 
 =================
 File Organization
@@ -137,13 +137,13 @@ The S3 bucket structure is organized as follows:
    │           ├── terminology.parquet (OPTIONAL)
    │           └── terminology.csv (REQUIRED)
    │
-   └── coordinate-transforms/
+   └── coordinate-transformations/
        └── <template>-<version>_to_<template>-<version>/
            └── <version>/
                ├── data_description.json (REQUIRED)
                ├── processing.json (REQUIRED if computed)
                ├── manifest.json (REQUIRED)
-               ├── coordinate_transforms.ome.zarr (OPTIONAL)
+               ├── coordinate_transformations.ome.zarr (OPTIONAL)
                └── <ANTs files> (OPTIONAL)
 
 Metadata
@@ -166,7 +166,7 @@ All computed assets (e.g. some templates) must have a processing.json in the top
    template
    annotation_set
    terminology
-   coordinate_transform
+   coordinate_transformation
 
 .. toctree::
    :maxdepth: 1
