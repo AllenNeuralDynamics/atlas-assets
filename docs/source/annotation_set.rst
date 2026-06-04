@@ -30,14 +30,14 @@ Files
 -----
 ``annotations.ome.zarr``
   * OME-Zarr 0.5 multiscale
-  * Correct coordinate transforms
+  * Correct coordinate transformations
   * Units in millimeters
   * Dimensions: ``AZYX`` (A = annotation label dimension)    
 
 ``annotations_compressed.ome.zarr``
   * Single integer label per voxel variant of ``annotations`` array.
   * OME-Zarr 0.5 multiscale
-  * Correct coordinate transforms
+  * Correct coordinate transformations
   * Dimensions: ``ZYX``
   s (millimeters)
 

@@ -30,7 +30,7 @@ Files
 -----
 ``template.ome.zarr``
   * OME-Zarr 0.5
-  * Coordinate transforms + orientation present
+  * Coordinate transformations + orientation present
   * Millimeter units
 
 ``template.nii.gz``
@@ -47,8 +47,8 @@ Files
 Validation Rules
 ----------------
 * OME-Zarr multiscales metadata valid and consistent (scale factors monotonic).
-* Anatomical orientation and coordinate transforms are defined and consistent across provided formats.
-* No missing scale levels referenced by transforms.
+* Anatomical orientation and coordinate transformations are defined and consistent across provided formats.
+* No missing scale levels referenced by transformations.
 
 Versioning
 ----------

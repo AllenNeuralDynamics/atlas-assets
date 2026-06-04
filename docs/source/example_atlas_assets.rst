@@ -31,9 +31,9 @@ This page provides examples of actual atlas assets currently available in the Al
    │   └── allen-adult-mouse-spim-lca-template/
    │       └── 2024-05/  # the SmartSPIM template in production now
    │
-   ├── coordinate-transforms/
+   ├── coordinate-transformations/
    │   └── allen-adult-mouse-spim-lca-2024-05_to_allen-adult-mouse-stpt-2015/
-   │       └── 2024-05/  # transform between SmartSPIM template and 2p template
+   │       └── 2024-05/  # transformation between SmartSPIM template and 2p template
    │
    ├── coordinate-spaces/
    │   ├── allen-adult-mouse-ccf-space/
