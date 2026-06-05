@@ -5,7 +5,7 @@ Changelog
 This page tracks the evolution and changes made to the Atlas Asset Organization specification.
 
 **August 29, 2025**
-   Adopted AToM model with simplified terms
+   Adopted AtOM model with simplified terms
 
 **August 12, 2025**
    Renamed "2p" -> "stpt" to be consistent with historical documents

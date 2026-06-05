@@ -5,6 +5,9 @@ Coordinate Space
 
 A Coordinate Space (anatomical space) defines the mathematical frame in which anatomical data are expressed: origin, axis directions/orientation, physical voxel spacing/units, and (optionally) an associated reference template image. Images are considered to reside in the same Coordinate Space when they are at least affine-aligned (same orientation, origin, and scaling) to the defining template/reference.
 
+.. seealso::
+   https://brain-bican.github.io/models/AnatomicalSpace/
+
 Directory Structure
 -------------------
 Subset of the global layout showing only coordinate space content (using the ``templates`` directory because the defining template typically lives there) and implicit reference from other assets:

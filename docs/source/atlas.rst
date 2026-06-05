@@ -5,6 +5,9 @@ Atlas
 
 An Atlas release bundles specific versions of the component assets required to interpret anatomical annotations in a defined coordinate space. It references (does not duplicate) one Coordinate Space, one Terminology, and one Annotation Set. The atlas itself is mostly metadata + a manifest tying these together.
 
+.. seealso::
+   https://brain-bican.github.io/models/ParcellationAtlas/
+
 Directory Structure
 -------------------
 Subset of the global layout:

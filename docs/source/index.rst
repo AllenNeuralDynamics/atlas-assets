@@ -9,6 +9,16 @@ This document provides a detailed overview of how brain atlas data assets are or
 .. seealso::
    For a history of changes to this specification, see the :doc:`changelog`.
 
+==========
+Foundation
+==========
+
+This specification operationalizes the **Atlas Ontology Model (AtOM)** [Kleven2023]_ and the **BICAN Anatomical Structure schema** (https://brain-bican.github.io/models/index_anatomical_structure/). AtOM is a community ontology, developed under the BICAN initiative, that standardizes how brain atlases are described and used across tools, workflows, and data infrastructures; it defines the core entities (parcellation atlas, anatomical space, anatomical dataset, anatomical annotation set, parcellation terminology, transformation) and the relationships between them. The BICAN Anatomical Structure schema provides the corresponding LinkML class definitions (``ParcellationAtlas``, ``AnatomicalSpace``, ``ImageDataset``, ``AnatomicalAnnotationSet``, ``ParcellationTerminology``, and the supporting ``ParcellationAnnotation`` / ``ParcellationAnnotationTermMap`` / ``ParcellationColorAssignment`` classes used inside terminology and annotation set assets).
+
+Each Core Concept below corresponds directly to a class from these models; the **AtOM class** callout on each section names the linked class, and the *seealso* block links to its published LinkML definition.
+
+.. [Kleven2023] Kleven, H., Gillespie, T.H., Zehl, L., Dickscheid, T., Bjaalie, J.G., Martone, M.E., Leergaard, T.B. (2023). *AtOM, an ontology model to standardize use of brain atlases in tools, workflows, and data infrastructures.* Scientific Data 10, 486. https://doi.org/10.1038/s41597-023-02389-4
+
 =============
 Core Concepts
 =============
@@ -16,10 +26,12 @@ Core Concepts
 Atlas
 -----
 
+**AtOM class:** ``ParcellationAtlas``
+
 A parcellation atlas is a versioned release reference used to guide experiments or deal with the spatial relationship between objects or the location of objects within the context of some anatomical structure. An atlas is minimally defined by a notion of space (either implicit or explicit) and an annotation set. Reference atlases usually have additional parts that make them more useful in certain situations, such as a well-defined coordinate system, delineations indicating the boundaries of various regions or cell populations, landmarks, and labels and names to make it easier to communicate about well-known and useful locations.
 
 .. seealso::
-   https://brain-bican.github.io/models/ParcellationAtlas/
+   AtOM ``ParcellationAtlas`` schema: https://brain-bican.github.io/models/ParcellationAtlas/
 
 **Also Known As:** parcellation atlas, reference atlas
 
@@ -34,10 +46,12 @@ For implementation details (structure, naming, manifest schema) see :doc:`atlas`
 Coordinate Space
 ----------------
 
+**AtOM class:** ``AnatomicalSpace``
+
 An anatomical space is versioned release of a mathematical space with a defined mapping between the anatomical axes and the mathematical axes. An anatomical space may be defined by a reference image chosen as the biological reference for an anatomical structure of interest derived from a single or multiple specimens.
 
 .. seealso::
-   https://brain-bican.github.io/models/AnatomicalSpace/
+   AtOM ``AnatomicalSpace`` schema: https://brain-bican.github.io/models/AnatomicalSpace/
 
 **Also Known As:** anatomical space
 
@@ -48,9 +62,14 @@ For implementation details (definition, naming, validation) see :doc:`coordinate
 Template
 --------
 
+**AtOM class:** ``AnatomicalDataset``
+
 A reference image that defines or is aligned to a Coordinate Space.
 
-**Also Known As:** average template, anatomical template
+.. seealso::
+   https://brain-bican.github.io/models/ImageDataset/
+
+**Also Known As:** average template, anatomical template, anatomical dataset, image dataset
 
 **Practically:** A reference image. Whether a template is a new revision of an existing template or a new template entirely is primarily about lineage and ease of co-registration. If the measurable differences are local/nonlinear, likely it should be a new revision. If you have to apply a nonlinear transformation, it's a new template.
 
@@ -59,10 +78,12 @@ For implementation details (files, validation, versioning) see :doc:`template`.
 Annotation Set
 --------------
 
+**AtOM class:** ``AnatomicalAnnotationSet``
+
 An anatomical annotation set is a versioned release of a set of anatomical annotations anchored in the same anatomical space that divides the space into distinct segments following some annotation criteria or parcellation scheme. For example, the anatomical annotation set of 3D image based reference atlases (e.g. Allen Mouse CCF) can be expressed as a set of label indices of single multi-valued image annotations or as a set of segmentation masks.
 
 .. seealso::
-   https://brain-bican.github.io/models/AnatomicalAnnotationSet/
+   AtOM ``AnatomicalAnnotationSet`` schema: https://brain-bican.github.io/models/AnatomicalAnnotationSet/
 
 **Also Known As:** anatomical annotation set, structure masks, structure meshes
 
@@ -73,10 +94,12 @@ For implementation details (files, naming, versioning) see :doc:`annotation_set`
 Terminology
 -----------
 
+**AtOM class:** ``ParcellationTerminology``
+
 A parcellation terminology is a versioned release of a set of terms that can be used to label annotations in an atlas, providing human readability and context and enabling communication about brain locations and structural properties. Typically, a terminology is a set of descriptive anatomical terms following a specific naming convention and/or organizational approach. The terminology may be a flat list (controlled vocabulary), a taxonomy and partonomy, or an ontology (ref: ILX:0777107, RRID:SCR_023499).
 
 .. seealso::
-   https://brain-bican.github.io/models/ParcellationTerminology/
+   AtOM ``ParcellationTerminology`` schema: https://brain-bican.github.io/models/ParcellationTerminology/
 
 **Also Known As:** parcellation terminology, ontology, structures.csv
 
@@ -87,10 +110,9 @@ For implementation details (directory layout, file schema, validation rules) see
 Coordinate Transformation
 -------------------------
 
-One or more concatenated mathematical operations that convert the physical coordinates of one template to another.
+**AtOM class:** ``Transformation`` (base class)
 
-.. note::
-   This is not part of the existing BICAN data model.
+One or more concatenated mathematical operations that convert the physical coordinates of one template to another.
 
 **Practically:** transformations, including nonlinear warps, defined specifically enough that we can map coordinates between anatomical spaces without secret code.
 
