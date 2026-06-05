@@ -5,6 +5,9 @@ Annotation Set
 
 An Annotation Set partitions a Coordinate Space into labeled regions (masks, meshes) using a specific Terminology. It is versioned; new versions capture refinements, added regions, or structural corrections.
 
+.. seealso::
+   https://brain-bican.github.io/models/AnatomicalAnnotationSet/
+
 Directory Structure
 -------------------
 .. code-block:: text

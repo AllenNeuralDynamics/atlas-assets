@@ -66,7 +66,10 @@ Template
 
 A reference image that defines or is aligned to a Coordinate Space.
 
-**Also Known As:** average template, anatomical template, anatomical dataset
+.. seealso::
+   https://brain-bican.github.io/models/ImageDataset/
+
+**Also Known As:** average template, anatomical template, anatomical dataset, image dataset
 
 **Practically:** A reference image. Whether a template is a new revision of an existing template or a new template entirely is primarily about lineage and ease of co-registration. If the measurable differences are local/nonlinear, likely it should be a new revision. If you have to apply a nonlinear transformation, it's a new template.
 
