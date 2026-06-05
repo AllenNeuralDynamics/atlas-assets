@@ -13,9 +13,9 @@ This document provides a detailed overview of how brain atlas data assets are or
 Foundation
 ==========
 
-This specification operationalizes the **Atlas Ontology Model (AtOM)** [Kleven2023]_, a community ontology developed under the BICAN initiative that standardizes how brain atlases are described and used across tools, workflows, and data infrastructures. AtOM defines the core entities (parcellation atlas, anatomical space, anatomical dataset, anatomical annotation set, parcellation terminology, transformation) and the relationships between them. Each Core Concept below corresponds directly to an AtOM class; the **AtOM class** callout on each section names the linked class in the BICAN model.
+This specification operationalizes the **Atlas Ontology Model (AtOM)** [Kleven2023]_ and the **BICAN Anatomical Structure schema** (https://brain-bican.github.io/models/index_anatomical_structure/). AtOM is a community ontology, developed under the BICAN initiative, that standardizes how brain atlases are described and used across tools, workflows, and data infrastructures; it defines the core entities (parcellation atlas, anatomical space, anatomical dataset, anatomical annotation set, parcellation terminology, transformation) and the relationships between them. The BICAN Anatomical Structure schema provides the corresponding LinkML class definitions (``ParcellationAtlas``, ``AnatomicalSpace``, ``ImageDataset``, ``AnatomicalAnnotationSet``, ``ParcellationTerminology``, and the supporting ``ParcellationAnnotation`` / ``ParcellationAnnotationTermMap`` / ``ParcellationColorAssignment`` classes used inside terminology and annotation set assets).
 
-The LinkML schemas for these classes are published at https://brain-bican.github.io/models/.
+Each Core Concept below corresponds directly to a class from these models; the **AtOM class** callout on each section names the linked class, and the *seealso* block links to its published LinkML definition.
 
 .. [Kleven2023] Kleven, H., Gillespie, T.H., Zehl, L., Dickscheid, T., Bjaalie, J.G., Martone, M.E., Leergaard, T.B. (2023). *AtOM, an ontology model to standardize use of brain atlases in tools, workflows, and data infrastructures.* Scientific Data 10, 486. https://doi.org/10.1038/s41597-023-02389-4
 
