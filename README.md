@@ -7,4 +7,10 @@
 ![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 ![Python](https://img.shields.io/badge/python->=3.10-blue?logo=python)
 
+A specification for how brain atlas data assets are organized, named, and
+versioned. It operationalizes the Atlas Ontology Model (AtOM) and the BICAN
+Anatomical Structure schema, defining the core concepts — atlas, coordinate
+space, template, annotation set, terminology, and coordinate transformation —
+and the layout that ties them together.
+
 See documentation for details: https://atlas-assets.readthedocs.io/en/latest/
