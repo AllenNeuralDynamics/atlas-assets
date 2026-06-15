@@ -27,7 +27,7 @@ A parcellation atlas is a versioned release reference used to guide experiments 
 
 * One coordinate space
 * One or more templates (all in the atlas's coordinate space)
-* One or more annotation sets (all in the atlas's coordinate space; each brings its own terminology)
+* One or more annotation sets (all in the atlas's coordinate space; each brings its own unique terminology)
 
 For implementation details (structure, naming, manifest schema) see :doc:`atlas`.
 

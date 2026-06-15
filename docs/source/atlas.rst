@@ -3,7 +3,7 @@ Atlas
 
 .. _atlas:
 
-An Atlas release bundles specific versions of the component assets required to interpret anatomical annotations in a defined coordinate space. It references (does not duplicate) one Coordinate Space, one or more Templates, and one or more Annotation Sets — all anchored to that single Coordinate Space. Each referenced Annotation Set brings its own Terminology, so a single atlas can group annotations that use different terminologies as long as they share the coordinate space. The atlas itself is mostly metadata + a manifest tying these components together.
+An Atlas release bundles specific versions of the component assets required to interpret anatomical annotations in a defined coordinate space. It references (does not duplicate) one Coordinate Space, one or more Templates, and one or more Annotation Sets — all anchored to that single Coordinate Space. Each referenced Annotation Set brings its own unique Terminology, so a single atlas can group annotations that use different terminologies as long as they share the coordinate space. The atlas itself is mostly metadata + a manifest tying these components together.
 
 Directory Structure
 -------------------
