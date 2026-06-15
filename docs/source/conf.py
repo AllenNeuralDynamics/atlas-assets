@@ -6,10 +6,6 @@
 
 from datetime import date
 
-# -- Path Setup --------------------------------------------------------------
-from os.path import abspath, dirname
-from pathlib import Path
-
 from atlas_assets import __version__ as package_version
 
 INSTITUTE_NAME = "Allen Institute for Neural Dynamics"
@@ -19,11 +15,15 @@ current_year = date.today().year
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = Path(dirname(dirname(dirname(abspath(__file__))))).name
+project = "atlas-assets"
 copyright = f"{current_year}, {INSTITUTE_NAME}"
 author = INSTITUTE_NAME
 release = package_version
 version = package_version
+
+# Use a clean sidebar title without the auto-appended version/"documentation";
+# the version is rendered separately by _templates/sidebar/brand.html.
+html_title = project
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
