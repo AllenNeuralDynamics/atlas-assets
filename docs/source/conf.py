@@ -23,6 +23,7 @@ project = Path(dirname(dirname(dirname(abspath(__file__))))).name
 copyright = f"{current_year}, {INSTITUTE_NAME}"
 author = INSTITUTE_NAME
 release = package_version
+version = package_version
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
