@@ -4,6 +4,11 @@ Changelog
 
 This page tracks the evolution and changes made to the Atlas Asset Organization specification.
 
+**v0.1.1 — June 15, 2026**
+   Updated the specification status from DRAFT to Released.
+
+   Surfaced the project version in the documentation sidebar.
+
 **v0.1.0 — June 15, 2026**
    First tagged release of the specification.
 
