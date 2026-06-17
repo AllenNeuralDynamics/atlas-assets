@@ -35,7 +35,8 @@ Files
   * OME-Zarr 0.5 multiscale
   * Correct coordinate transformations
   * Units in millimeters
-  * Dimensions: ``AZYX`` (A = annotation label dimension)    
+  * Dimensions: ``AZYX`` (A = annotation label dimension)
+  * Chunks should be compressed (e.g. Blosc/Zstd). Most OME-Zarr writers apply a sensible default, but verify when using a custom writer — uncompressed annotation volumes are extremely large.
 
 ``annotations_compressed.ome.zarr``
   * Single integer label per voxel variant of ``annotations`` array.
@@ -43,6 +44,7 @@ Files
   * Correct coordinate transformations
   * Dimensions: ``ZYX``
   s (millimeters)
+  * Chunks should be compressed (e.g. Blosc/Zstd). Most OME-Zarr writers apply a sensible default, but verify when using a custom writer — uncompressed annotation volumes are extremely large.
 
 ``annotations.precomputed``
   * stores compressed masks in Neuroglancer precomputed format
