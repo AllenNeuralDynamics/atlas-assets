@@ -68,6 +68,7 @@ Files
 Versioning
 ----------
 Increment version when:
+
 * Any component transformation changes (affine parameters, warp field recalculation)
 * Underlying source or target template version changes
 * Directionality changes (e.g., adding validated inverse)
