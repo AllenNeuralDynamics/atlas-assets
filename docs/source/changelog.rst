@@ -4,6 +4,15 @@ Changelog
 
 This page tracks the evolution and changes made to the Atlas Asset Organization specification.
 
+**v0.1.2 — June 22, 2026**
+   Added an optional ``<label>`` token to the atlas naming convention.
+
+   Required a ``manifest.json`` file for the template component.
+
+   Specified OME-Zarr 0.5 as the minimum version and recommended compression for annotation OME-Zarr files.
+
+   Codified the ``annotation_values`` array name in the annotation set specification.
+
 **v0.1.1 — June 15, 2026**
    Updated the specification status from DRAFT to Released.
 
