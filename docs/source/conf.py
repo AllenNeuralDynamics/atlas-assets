@@ -25,6 +25,12 @@ version = package_version
 # the version is rendered separately by _templates/sidebar/brand.html.
 html_title = project
 
+# Make the package version available to the docs as a substitution so the
+# status banner stays in sync with the release (see index.rst).
+rst_prolog = f"""
+.. |spec_status| replace:: **Status: Released — v{package_version}**
+"""
+
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
