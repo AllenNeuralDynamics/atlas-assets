@@ -32,15 +32,16 @@ Example: ``allen-adult-mouse-annotation``
 Files
 -----
 ``annotations.ome.zarr``
-  * OME-Zarr 0.5 multiscale
+  * OME-Zarr >= 0.5 multiscale
   * Correct coordinate transformations
   * Units in millimeters
   * Dimensions: ``AZYX`` (A = annotation label dimension)
   * Chunks should be compressed (e.g. Blosc/Zstd). Most OME-Zarr writers apply a sensible default, but verify when using a custom writer — uncompressed annotation volumes are extremely large.
+  * The mapping from each index along the ``A`` dimension to its corresponding terminology ``annotation_value`` MUST be stored in an array named ``annotation_values``.
 
 ``annotations_compressed.ome.zarr``
   * Single integer label per voxel variant of ``annotations`` array.
-  * OME-Zarr 0.5 multiscale
+  * OME-Zarr >= 0.5 multiscale
   * Correct coordinate transformations
   * Dimensions: ``ZYX``
   s (millimeters)
