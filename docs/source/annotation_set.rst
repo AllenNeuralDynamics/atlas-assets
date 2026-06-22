@@ -35,7 +35,8 @@ Files
   * OME-Zarr 0.5 multiscale
   * Correct coordinate transformations
   * Units in millimeters
-  * Dimensions: ``AZYX`` (A = annotation label dimension)    
+  * Dimensions: ``AZYX`` (A = annotation label dimension)
+  * The mapping from each index along the ``A`` dimension to its corresponding terminology ``annotation_value`` MUST be stored in an array named ``annotation_values``.
 
 ``annotations_compressed.ome.zarr``
   * Single integer label per voxel variant of ``annotations`` array.
