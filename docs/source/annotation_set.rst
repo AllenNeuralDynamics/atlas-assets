@@ -32,7 +32,7 @@ Example: ``allen-adult-mouse-annotation``
 Files
 -----
 ``annotations.ome.zarr``
-  * OME-Zarr 0.5 multiscale
+  * OME-Zarr >= 0.5 multiscale
   * Correct coordinate transformations
   * Units in millimeters
   * Dimensions: ``AZYX`` (A = annotation label dimension)
@@ -40,7 +40,7 @@ Files
 
 ``annotations_compressed.ome.zarr``
   * Single integer label per voxel variant of ``annotations`` array.
-  * OME-Zarr 0.5 multiscale
+  * OME-Zarr >= 0.5 multiscale
   * Correct coordinate transformations
   * Dimensions: ``ZYX``
   s (millimeters)

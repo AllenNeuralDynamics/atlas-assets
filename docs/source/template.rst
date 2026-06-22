@@ -32,7 +32,7 @@ Examples:
 Files
 -----
 ``template.ome.zarr``
-  * OME-Zarr 0.5
+  * OME-Zarr >= 0.5
   * Coordinate transformations + orientation present
   * Millimeter units
 
