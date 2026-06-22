@@ -24,12 +24,15 @@ Naming Convention
 -----------------
 Pattern for ``<atlas_name>``::
 
-   <organization>-<age>-<species>-atlas
+   <organization>-<age>-<species>-<label>-atlas
+
+``<label>`` is optional (e.g. ``ccf``).
 
 Examples:
 
-* ``allen-adult-mouse-atlas``
-* ``allen-dev-P4-mouse-atlas``
+* ``allen-adult-mouse-ccf-atlas``
+* ``allen-adult-mouse-atlas`` (no label)
+* ``allen-dev-P4-mouse-atlas`` (no label)
 
 
 
