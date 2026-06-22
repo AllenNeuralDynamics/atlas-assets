@@ -16,6 +16,7 @@ Directory Structure
      └── <template_name>/
          └── <version>/
              ├── data_description.json (REQUIRED)
+             ├── manifest.json         (REQUIRED)
              ├── processing.json       (REQUIRED IF COMPUTED)
              ├── template.ome.zarr (REQUIRED)
              └── template_{resolution}.nii.gz   (OPTIONAL)
@@ -42,7 +43,14 @@ Files
 
 ``data_description.json``
   * ``aind_data_schema >= 2.0``
-  * Declares alignment / defining status for a Coordinate Space
+
+``manifest.json``
+  * References the Coordinate Space this template defines or is aligned to. Minimal required keys (draft):
+
+    * ``coordinate_space`` – object with ``name`` and ``version``
+    * ``alignment`` – this template's relationship to the Coordinate Space: ``defining`` (the template defines the space) or ``aligned`` (rigidly/affinely aligned to it)
+    * ``created`` – ISO 8601 date/time
+    * ``schema_version`` – version of the manifest contract
 
 ``processing.json``
   * Averaging / registration methods; reference datasets
@@ -52,6 +60,7 @@ Validation Rules
 * OME-Zarr multiscales metadata valid and consistent (scale factors monotonic).
 * Anatomical orientation and coordinate transformations are defined and consistent across provided formats.
 * No missing scale levels referenced by transformations.
+* The Coordinate Space referenced in ``manifest.json`` (matching name and version) must exist.
 
 Versioning
 ----------
