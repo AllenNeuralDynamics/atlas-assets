@@ -55,7 +55,7 @@ Files
   * ``directionality`` – ``one-way`` | ``bidirectional``
 
 ``coordinate_transformations.ome.zarr``
-  * OME-Zarr 0.5 container encoding transformation chain using multiscale / coordinateTransformations metadata. Can contain:
+  * OME-Zarr >= 0.5 container encoding transformation chain using multiscale / coordinateTransformations metadata. Can contain:
   * Displacement field(s)
   * Affine matrices
 
