@@ -44,7 +44,7 @@ Files
   * OME-Zarr >= 0.5 multiscale
   * Correct coordinate transformations
   * Dimensions: ``ZYX``
-  s (millimeters)
+  * Units in millimeters
   * Chunks should be compressed (e.g. Blosc/Zstd). Most OME-Zarr writers apply a sensible default, but verify when using a custom writer — uncompressed annotation volumes are extremely large.
 
 ``annotations.precomputed``
