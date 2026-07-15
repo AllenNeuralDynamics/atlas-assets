@@ -1,0 +1,10 @@
+/* Match the dark-theme text color to the pure white (#FFFFFF) of the logo. */
+body[data-theme="dark"] {
+  --color-foreground-primary: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="light"]) {
+    --color-foreground-primary: #ffffff;
+  }
+}
