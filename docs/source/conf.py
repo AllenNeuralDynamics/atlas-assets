@@ -49,6 +49,7 @@ exclude_patterns = []
 html_theme = "furo"
 html_static_path = ["_static"]
 html_favicon = "_static/favicon.ico"
+html_css_files = ["custom.css"]
 html_theme_options = {
     "light_logo": "AI_medium_blue_black.png",
     "dark_logo": "AI_medium_white.png",
