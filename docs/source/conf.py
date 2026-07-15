@@ -50,8 +50,8 @@ html_theme = "furo"
 html_static_path = ["_static"]
 html_favicon = "_static/favicon.ico"
 html_theme_options = {
-    "light_logo": "Web_AllenInstitute_Logo_RGB.png",  # light-logo.svg",
-    "dark_logo": "Web_AllenInstitute_Logo_RGB.png",  # dark-logo.svg",
+    "light_logo": "AI_medium_blue_black.png",
+    "dark_logo": "AI_medium_white.png",
 }
 
 # If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
