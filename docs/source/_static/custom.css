@@ -11,9 +11,11 @@ body[data-theme="dark"] {
   }
 }
 
-/* Light mode: match the logo's black text (#000000), no muted gray. */
-body[data-theme="light"],
-body:not([data-theme="dark"]) {
+/* Light mode: match the logo's black text (#000000), no muted gray.
+   Mirror furo's own light/dark selectors so "auto" mode follows the
+   system preference (an unscoped body:not([data-theme=dark]) rule would
+   also match auto+system-dark and wrongly override the white above). */
+body[data-theme="light"] {
   --color-sidebar-caption-text: #000000;
 }
 
