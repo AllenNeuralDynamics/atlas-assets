@@ -15,7 +15,7 @@ Subset of the global layout showing only the coordinate space content:
 .. code-block:: text
 
    coordinate-spaces/
-     └── <coordinate-space-name>/
+     └── <coordinate_space_name>/
          └── <version>/
              ├── data_description.json (REQUIRED)
              └── manifest.json (REQUIRED)
