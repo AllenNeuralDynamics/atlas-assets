@@ -21,10 +21,14 @@ Only the terminology subtree of the global layout is shown here:
          └── <version>/
              ├── data_description.json (REQUIRED)
              ├── terminology.csv       (REQUIRED)
-             └── terminology.parquet   (OPTIONAL)
+             ├── terminology.parquet   (OPTIONAL)
+             └── legacy_files/         (OPTIONAL)
 
 Naming Convention
 -----------------
+.. note::
+   Naming conventions in this specification are recommended guidelines to encourage consistency, not requirements.
+
 ``<terminology_name> = <organization>-<age>-<species>-terminology``
 
 Examples:
@@ -50,6 +54,9 @@ Files
 
 ``terminology.parquet``
   Column-parallel equivalent of ``terminology.csv`` for efficient analytical access. If present, MUST contain identical data values and column names.
+
+``legacy_files/``
+  Optional directory holding legacy or original source files (e.g. prior ontology exports) retained for provenance; not part of the canonical terminology tables.
 
 CSV Schema
 ----------

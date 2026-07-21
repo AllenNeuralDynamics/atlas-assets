@@ -23,6 +23,8 @@ Subset of the global layout showing only the coordinate space content:
 
 Naming Convention
 -----------------
+.. note::
+   Naming conventions in this specification are recommended guidelines to encourage consistency, not requirements.
 
 ``<coordinate_space_name> = <organization>-<age>-<species>-<label>-space``
 

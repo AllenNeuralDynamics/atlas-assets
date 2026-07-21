@@ -15,16 +15,20 @@ Directory Structure
    annotation-sets/
      └── <annotation_set_name>/
          └── <version>/
-             ├── data_description.json           (REQUIRED)
-             ├── annotations.ome.zarr            (REQUIRED)
-             ├── annotations_compressed.ome.zarr (OPTIONAL)
-             ├── annotations.precomputed         (REQUIRED)
-             ├── annotations_smooth.precomputed  (OPTIONAL)
-             ├── parcellation_volumes.csv        (OPTIONAL)
-             └── manifest.json                   (REQUIRED)
+             ├── data_description.json                      (REQUIRED)
+             ├── annotations.ome.zarr                       (REQUIRED)
+             ├── annotations_compressed.ome.zarr            (OPTIONAL)
+             ├── annotations_compressed_{resolution}.nii.gz (OPTIONAL)
+             ├── annotations.precomputed                    (REQUIRED)
+             ├── annotations_smooth.precomputed             (OPTIONAL)
+             ├── parcellation_volumes.csv                   (OPTIONAL)
+             └── manifest.json                              (REQUIRED)
 
 Naming Convention
 -----------------
+.. note::
+   Naming conventions in this specification are recommended guidelines to encourage consistency, not requirements.
+
 ``<annotation_set_name> = <organization>-<age>-<species>-annotation``
 
 Example: ``allen-adult-mouse-annotation``
@@ -46,6 +50,9 @@ Files
   * Dimensions: ``ZYX``
   * Units in millimeters
   * Chunks should be compressed (e.g. Blosc/Zstd). Most OME-Zarr writers apply a sensible default, but verify when using a custom writer — uncompressed annotation volumes are extremely large.
+
+``annotations_compressed_{resolution}.nii.gz``
+  * NIfTI export of the single-label ``annotations_compressed`` volume at the given resolution (e.g. ``annotations_compressed_25.nii.gz``).
 
 ``annotations.precomputed``
   * stores compressed masks in Neuroglancer precomputed format

@@ -130,50 +130,52 @@ The S3 bucket structure is organized as follows:
    ├── atlases/
    │   └── <atlas_name>/
    │       └── <version>/
-   │           ├── data_description.json (REQUIRED)
-   │           └── manifest.json         (REQUIRED)
+   │           ├── data_description.json                      (REQUIRED)
+   │           └── manifest.json                              (REQUIRED)
    │
    ├── templates/
    │   └── <template_name>/
    │       └── <version>/
-   │           ├── data_description.json (REQUIRED)
-   │           ├── manifest.json         (REQUIRED)
-   │           ├── processing.json       (REQUIRED IF COMPUTED)
-   │           ├── template.ome.zarr     (REQUIRED)
-   │           └── template.nii.gz       (OPTIONAL)
+   │           ├── data_description.json                      (REQUIRED)
+   │           ├── manifest.json                              (REQUIRED)
+   │           ├── processing.json                            (REQUIRED if computed)
+   │           ├── template.ome.zarr                          (REQUIRED)
+   │           └── template.nii.gz                            (OPTIONAL)
    │
    ├── annotation-sets/
    │   └── <annotation_set_name>/
    │       └── <version>/
-   │           ├── data_description.json           (REQUIRED)
-   │           ├── annotations.ome.zarr            (REQUIRED)
-   │           ├── annotations_compressed.ome.zarr (OPTIONAL)
-   │           ├── annotations.precomputed         (REQUIRED)
-   │           ├── annotations_smooth.precomputed  (OPTIONAL)
-   │           ├── parcellation_volumes.csv        (OPTIONAL)
-   │           └── manifest.json                   (REQUIRED)
+   │           ├── data_description.json                      (REQUIRED)
+   │           ├── annotations.ome.zarr                       (REQUIRED)
+   │           ├── annotations_compressed.ome.zarr            (OPTIONAL)
+   │           ├── annotations_compressed_{resolution}.nii.gz (OPTIONAL)
+   │           ├── annotations.precomputed                    (REQUIRED)
+   │           ├── annotations_smooth.precomputed             (OPTIONAL)
+   │           ├── parcellation_volumes.csv                   (OPTIONAL)
+   │           └── manifest.json                              (REQUIRED)
    │
    ├── terminologies/
    │   └── <terminology_name>/
    │       └── <version>/
-   │           ├── data_description.json (REQUIRED)
-   │           ├── terminology.parquet   (OPTIONAL)
-   │           └── terminology.csv       (REQUIRED)
+   │           ├── data_description.json                      (REQUIRED)
+   │           ├── terminology.parquet                        (OPTIONAL)
+   │           ├── terminology.csv                            (REQUIRED)
+   │           └── legacy_files/                              (OPTIONAL)
    │
    ├── coordinate-spaces/
    │   └── <coordinate_space_name>/
    │       └── <version>/
-   │           ├── data_description.json (REQUIRED)
-   │           └── manifest.json         (REQUIRED)
+   │           ├── data_description.json                      (REQUIRED)
+   │           └── manifest.json                              (REQUIRED)
    │
    └── coordinate-transformations/
        └── <template>-<version>_to_<template>-<version>/
            └── <version>/
-               ├── data_description.json               (REQUIRED)
-               ├── processing.json                     (REQUIRED if computed)
-               ├── manifest.json                       (REQUIRED)
-               ├── coordinate_transformations.ome.zarr (OPTIONAL)
-               └── <ANTs files>                        (OPTIONAL)
+               ├── data_description.json                      (REQUIRED)
+               ├── processing.json                            (REQUIRED if computed)
+               ├── manifest.json                              (REQUIRED)
+               ├── coordinate_transformations.ome.zarr        (OPTIONAL)
+               └── <ANTs files>                               (OPTIONAL)
 
 Metadata
 --------

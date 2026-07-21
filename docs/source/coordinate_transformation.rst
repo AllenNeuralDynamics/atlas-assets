@@ -28,6 +28,9 @@ Follows the pattern shown in the global layout (subset repeated here):
 
 Naming Conventions
 ------------------
+.. note::
+   Naming conventions in this specification are recommended guidelines to encourage consistency, not requirements.
+
 Top-level transformation folder name:
 
 ``<source_template>-<source_version>_to_<target_template>-<target_version>``
