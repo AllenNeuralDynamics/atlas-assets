@@ -17,7 +17,7 @@ Directory Structure
          └── <version>/
              ├── data_description.json        (REQUIRED)
              ├── manifest.json                (REQUIRED)
-             ├── processing.json              (REQUIRED IF COMPUTED)
+             ├── processing.json              (REQUIRED if computed)
              ├── template.ome.zarr            (REQUIRED)
              └── template_{resolution}.nii.gz (OPTIONAL)
 

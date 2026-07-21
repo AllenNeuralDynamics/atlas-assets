@@ -138,7 +138,7 @@ The S3 bucket structure is organized as follows:
    │       └── <version>/
    │           ├── data_description.json                      (REQUIRED)
    │           ├── manifest.json                              (REQUIRED)
-   │           ├── processing.json                            (REQUIRED IF COMPUTED)
+   │           ├── processing.json                            (REQUIRED if computed)
    │           ├── template.ome.zarr                          (REQUIRED)
    │           └── template.nii.gz                            (OPTIONAL)
    │
