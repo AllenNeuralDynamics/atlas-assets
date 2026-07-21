@@ -2,7 +2,7 @@
 Example Atlas Assets
 ====================
 
-This page provides examples of actual atlas assets currently available in the Allen Atlas Assets repository, showing how the naming conventions and organization structure are applied in practice.
+This page shows example atlas assets currently available in the Allen Atlas Assets repository, illustrating how the naming conventions and organizational structure apply in practice.
 
 .. code-block:: text
 
@@ -26,7 +26,7 @@ This page provides examples of actual atlas assets currently available in the Al
    │   │   └── 2015/  # the tissuecyte template, used in all "CCFs"
    │   │
    │   ├── allen-adult-mouse-nissl-template/
-   │   │   └── 2011/  # the coregistered 3D nissl slices ABA was all aligned to
+   │   │   └── 2011/  # the coregistered 3D Nissl slices that ABA was aligned to
    │   │
    │   └── allen-adult-mouse-spim-lca-template/
    │       └── 2024-05/  # the SmartSPIM template in production now

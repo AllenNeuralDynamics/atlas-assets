@@ -4,7 +4,7 @@ Atlas Asset Organization
 .. note::
    |spec_status|
 
-This document provides a detailed overview of how brain atlas data assets are organized within an S3 bucket (``s3://allen-atlas-assets``). It describes directory structure, naming conventions, data access patterns, and governance.
+This document describes how brain atlas data assets are organized within an S3 bucket (``s3://allen-atlas-assets``), covering directory structure, naming conventions, data access patterns, and governance.
 
 .. seealso::
    For a history of changes to this specification, see the :doc:`changelog`.
@@ -28,7 +28,7 @@ Atlas
 
 **AtOM class:** ``ParcellationAtlas``
 
-A parcellation atlas is a versioned release reference used to guide experiments or deal with the spatial relationship between objects or the location of objects within the context of some anatomical structure. An atlas is minimally defined by a notion of space (either implicit or explicit) and an annotation set. Reference atlases usually have additional parts that make them more useful in certain situations, such as a well-defined coordinate system, delineations indicating the boundaries of various regions or cell populations, landmarks, and labels and names to make it easier to communicate about well-known and useful locations.
+A parcellation atlas is a versioned release used to guide experiments and to reason about the spatial relationships and locations of objects within an anatomical structure. An atlas is minimally defined by a notion of space (either implicit or explicit) and an annotation set. Reference atlases usually have additional parts that make them more useful in certain situations, such as a well-defined coordinate system, delineations indicating the boundaries of various regions or cell populations, landmarks, and labels and names to make it easier to communicate about well-known and useful locations.
 
 .. seealso::
    AtOM ``ParcellationAtlas`` schema: https://brain-bican.github.io/models/ParcellationAtlas/
@@ -48,7 +48,7 @@ Coordinate Space
 
 **AtOM class:** ``AnatomicalSpace``
 
-An anatomical space is versioned release of a mathematical space with a defined mapping between the anatomical axes and the mathematical axes. An anatomical space may be defined by a reference image chosen as the biological reference for an anatomical structure of interest derived from a single or multiple specimens.
+An anatomical space is a versioned release of a mathematical space with a defined mapping between the anatomical axes and the mathematical axes. An anatomical space may be defined by a reference image chosen as the biological reference for an anatomical structure of interest, derived from one or more specimens.
 
 .. seealso::
    AtOM ``AnatomicalSpace`` schema: https://brain-bican.github.io/models/AnatomicalSpace/
@@ -114,7 +114,7 @@ Coordinate Transformation
 
 One or more concatenated mathematical operations that convert the physical coordinates of one template to another.
 
-**Practically:** transformations, including nonlinear warps, defined specifically enough that we can map coordinates between anatomical spaces without secret code.
+**Practically:** transformations, including nonlinear warps, defined precisely enough to map coordinates between anatomical spaces without undocumented or ad hoc code.
 
 For implementation details (naming, files, validation rules) see :doc:`coordinate_transformation`.
 
@@ -171,9 +171,9 @@ The S3 bucket structure is organized as follows:
 Metadata
 --------
 
-All data assets must have a data_description.json file in the top level of the asset folder that is valid according to aind-data-schema.
+All data assets must have a data_description.json file at the top level of the asset folder that is valid according to aind-data-schema.
 
-All computed assets (e.g. some templates) must have a processing.json in the top level of the asset folder that is valid according to aind-data-schema.
+All computed assets (e.g. some templates) must have a processing.json at the top level of the asset folder that is valid according to aind-data-schema.
 
 .. seealso::
    For examples of actual atlas assets and their naming, see :doc:`example_atlas_assets`.

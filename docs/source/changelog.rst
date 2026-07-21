@@ -2,7 +2,7 @@
 Changelog
 =========
 
-This page tracks the evolution and changes made to the Atlas Asset Organization specification.
+This page tracks changes to the Atlas Asset Organization specification.
 
 **v0.1.2 — June 22, 2026**
    Added an optional ``<label>`` token to the atlas naming convention.
