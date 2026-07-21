@@ -17,8 +17,8 @@ Subset of the global layout:
    atlases/
      └── <atlas_name>/
          └── <version>/
-             ├── data_description.json   (REQUIRED)
-             └── manifest.json           (REQUIRED)
+             ├── data_description.json (REQUIRED)
+             └── manifest.json         (REQUIRED)
 
 Naming Convention
 -----------------

@@ -15,11 +15,11 @@ Directory Structure
    templates/
      └── <template_name>/
          └── <version>/
-             ├── data_description.json (REQUIRED)
-             ├── manifest.json         (REQUIRED)
-             ├── processing.json       (REQUIRED IF COMPUTED)
-             ├── template.ome.zarr (REQUIRED)
-             └── template_{resolution}.nii.gz   (OPTIONAL)
+             ├── data_description.json        (REQUIRED)
+             ├── manifest.json                (REQUIRED)
+             ├── processing.json              (REQUIRED IF COMPUTED)
+             ├── template.ome.zarr            (REQUIRED)
+             └── template_{resolution}.nii.gz (OPTIONAL)
 
 Naming Convention
 -----------------

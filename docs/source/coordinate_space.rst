@@ -18,7 +18,7 @@ Subset of the global layout showing only the coordinate space content:
      └── <coordinate_space_name>/
          └── <version>/
              ├── data_description.json (REQUIRED)
-             └── manifest.json (REQUIRED)
+             └── manifest.json         (REQUIRED)
 
 
 Naming Convention
