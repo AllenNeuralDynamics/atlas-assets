@@ -8,7 +8,7 @@ Terminology assets define the controlled vocabulary (taxonomy or ontology) used 
 .. seealso::
    https://brain-bican.github.io/models/ParcellationTerminology/
 
-See core concept description under the Terminology section on the main index page for high-level background.
+For high-level background, see the Terminology section on the main index page.
 
 Directory Structure
 -------------------
@@ -60,10 +60,10 @@ Columns (order recommended):
 * ``annotation_value`` – Integer value used in annotation volumes/maps corresponding to this structure; MUST be unique when not null.
 * ``name`` – Full human-readable structure name (Title Case preferred).
 * ``abbreviation`` – Short uppercase or mixed-case code (unique within the terminology scope).
-* ``color_hex_triplet`` – Six hexadecimal digits prefixed with ``#`` (``#RRGGBB``); represents display color.
+* ``color_hex_triplet`` – Six hexadecimal digits prefixed with ``#`` (``#RRGGBB``); represents the display color.
 * ``descendant_identifiers`` – (OPTIONAL) Delimited list of all descendant ``identifier`` values; a denormalization for rapid queries.
 * ``descendant_annotation_values`` – (OPTIONAL) Delimited list of all descendant ``annotation_value`` integers.
-* ``root_identifier_path`` - (OPTIONAL) Delimited list of ancestor ``identifier`` values from root to self.
+* ``root_identifier_path`` – (OPTIONAL) Delimited list of ancestor ``identifier`` values from root to self.
 
 Validation Rules
 ----------------
@@ -83,5 +83,5 @@ Acceptable changes for a new version include:
 * Re-parenting nodes – structural breaking change.
 * Deleting / merging nodes – breaking change; MUST document mapping.
 
-Breaking changes SHOULD bump a significant part of your internal semantic version. At minimum, any change altering the parent-child relationships, identifiers, or annotation values MUST increment the version.
+Breaking changes SHOULD increment a significant component of the internal semantic version. At minimum, any change that alters parent-child relationships, identifiers, or annotation values MUST increment the version.
 

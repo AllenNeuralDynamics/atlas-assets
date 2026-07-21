@@ -10,12 +10,12 @@ A Coordinate Space (anatomical space) defines the mathematical frame in which an
 
 Directory Structure
 -------------------
-Subset of the global layout showing only coordinate space content (using the ``templates`` directory because the defining template typically lives there) and implicit reference from other assets:
+Subset of the global layout showing only the coordinate space content:
 
 .. code-block:: text
 
    coordinate-spaces/
-     └── <coordinate-space-name>/
+     └── <coordinate_space_name>/
          └── <version>/
              ├── data_description.json (REQUIRED)
              └── manifest.json (REQUIRED)
@@ -37,17 +37,17 @@ Files
 -----
 
 ``data_description.json``
-  ``aind_data_schema >= 2.0``; documents administrative metadata
+  Must validate against ``aind_data_schema >= 2.0``. Documents administrative metadata.
 
-``manifest.json`` 
-  documents the origin, spacing (inc units), and defining anatomical template 
+``manifest.json``
+  Documents the origin, spacing (including units), and defining anatomical template.
 
 
 Versioning
 ----------
 New space when:
 
-* Interpretation of coordinates in physical units changes - i.e. change in origin.
+* The interpretation of coordinates in physical units changes (for example, a change in origin).
 
 New version when:
 

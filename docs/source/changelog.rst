@@ -2,7 +2,12 @@
 Changelog
 =========
 
-This page tracks the evolution and changes made to the Atlas Asset Organization specification.
+This page tracks changes to the Atlas Asset Organization specification.
+
+**v0.1.3 — July 21, 2026**
+   Reconciled the File Organization layout with the per-asset pages: corrected the annotation set file list, added the required ``manifest.json`` to templates and annotation sets, and added the coordinate spaces directory.
+
+   Copy-edited the specification for clarity, grammar, and tone.
 
 **v0.1.2 — June 22, 2026**
    Added an optional ``<label>`` token to the atlas naming convention.

@@ -15,7 +15,7 @@ Directory Structure
    annotation-sets/
      └── <annotation_set_name>/
          └── <version>/
-             ├── data_description.json.         (REQUIRED)
+             ├── data_description.json           (REQUIRED)
              ├── annotations.ome.zarr            (REQUIRED)
              ├── annotations_compressed.ome.zarr (OPTIONAL)
              ├── annotations.precomputed         (REQUIRED)
@@ -53,14 +53,14 @@ Files
   * includes segment properties with name and abbreviation of annotation
 
 ``annotations_smooth.precomputed``
-  * Smoothed version of meshes for visualization-only
+  * Smoothed version of the meshes, for visualization only.
 
 ``parcellation_volumes.csv``
-  * Document the volume of annotation for each identifier.
+  * Documents the annotated volume for each identifier.
   * Columns: ``identifier``, ``voxel_count``, ``volume_mm3``
 
 ``manifest.json``
-  * References terminology name/version & coordinate space version; including component paths
+  * References the terminology name/version and coordinate space version, including component paths.
 
 ``data_description.json``
   * ``aind_data_schema >= 2.0``: includes administrative metadata, description, provenance, authorship, licensing, references
