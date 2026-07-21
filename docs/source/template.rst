@@ -23,6 +23,9 @@ Directory Structure
 
 Naming Convention
 -----------------
+.. note::
+   Naming conventions in this specification are recommended guidelines to encourage consistency, not requirements.
+
 ``<template_name> = <organization>-<age>-<species>-<modality>-<technique>-template``
 
 Examples:

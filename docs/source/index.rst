@@ -145,13 +145,14 @@ The S3 bucket structure is organized as follows:
    ├── annotation-sets/
    │   └── <annotation_set_name>/
    │       └── <version>/
-   │           ├── data_description.json           (REQUIRED)
-   │           ├── annotations.ome.zarr            (REQUIRED)
-   │           ├── annotations_compressed.ome.zarr (OPTIONAL)
-   │           ├── annotations.precomputed         (REQUIRED)
-   │           ├── annotations_smooth.precomputed  (OPTIONAL)
-   │           ├── parcellation_volumes.csv        (OPTIONAL)
-   │           └── manifest.json                   (REQUIRED)
+   │           ├── data_description.json                      (REQUIRED)
+   │           ├── annotations.ome.zarr                       (REQUIRED)
+   │           ├── annotations_compressed.ome.zarr            (OPTIONAL)
+   │           ├── annotations_compressed_{resolution}.nii.gz (OPTIONAL)
+   │           ├── annotations.precomputed                    (REQUIRED)
+   │           ├── annotations_smooth.precomputed             (OPTIONAL)
+   │           ├── parcellation_volumes.csv                   (OPTIONAL)
+   │           └── manifest.json                              (REQUIRED)
    │
    ├── terminologies/
    │   └── <terminology_name>/

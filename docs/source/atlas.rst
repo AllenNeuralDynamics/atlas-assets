@@ -22,6 +22,9 @@ Subset of the global layout:
 
 Naming Convention
 -----------------
+.. note::
+   Naming conventions in this specification are recommended guidelines to encourage consistency, not requirements.
+
 Pattern for ``<atlas_name>``::
 
    <organization>-<age>-<species>-<label>-atlas
