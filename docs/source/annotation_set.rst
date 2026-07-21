@@ -21,7 +21,7 @@ Directory Structure
              ├── annotations.precomputed         (REQUIRED)
              ├── annotations_smooth.precomputed  (OPTIONAL)
              ├── parcellation_volumes.csv        (OPTIONAL)
-             └── manifest.json                  (REQUIRED)
+             └── manifest.json                   (REQUIRED)
 
 Naming Convention
 -----------------
