@@ -4,12 +4,12 @@ Changelog
 
 This page tracks changes to the Atlas Asset Organization specification.
 
-**v0.1.3 — July 21, 2026**
+**v0.1.3 — July 21, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.3/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.3>`__
    Reconciled the File Organization layout with the per-asset pages: corrected the annotation set file list, added the required ``manifest.json`` to templates and annotation sets, and added the coordinate spaces directory.
 
    Copy-edited the specification for clarity, grammar, and tone.
 
-**v0.1.2 — June 22, 2026**
+**v0.1.2 — June 22, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.2/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.2>`__
    Added an optional ``<label>`` token to the atlas naming convention.
 
    Required a ``manifest.json`` file for the template component.
@@ -18,12 +18,12 @@ This page tracks changes to the Atlas Asset Organization specification.
 
    Codified the ``annotation_values`` array name in the annotation set specification.
 
-**v0.1.1 — June 15, 2026**
+**v0.1.1 — June 15, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.1/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.1>`__
    Updated the specification status from DRAFT to Released.
 
    Surfaced the project version in the documentation sidebar.
 
-**v0.1.0 — June 15, 2026**
+**v0.1.0 — June 15, 2026** — `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.0>`__
    First tagged release of the specification.
 
    Clarified that an atlas groups one or more annotation sets and templates, all anchored to a single coordinate space, with each annotation set carrying its own unique terminology.
