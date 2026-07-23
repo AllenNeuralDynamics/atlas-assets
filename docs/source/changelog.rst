@@ -4,6 +4,19 @@ Changelog
 
 This page tracks changes to the Atlas Asset Organization specification.
 
+**v0.1.4 — July 23, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.4/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.4>`__
+   Added the required ``manifest.json`` file to the terminology specification.
+
+   Added the optional ``annotations_compressed_{resolution}.nii.gz`` file to the annotation set specification.
+
+   Added the optional ``legacy_files/`` directory to the terminology specification.
+
+   Clarified that naming conventions are recommended guidelines, not requirements.
+
+   Generalized storage wording from "S3 bucket" to "folder or cloud object storage".
+
+   Linked each changelog release to its rendered documentation and GitHub tag.
+
 **v0.1.3 — July 21, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.3/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.3>`__
    Reconciled the File Organization layout with the per-asset pages: corrected the annotation set file list, added the required ``manifest.json`` to templates and annotation sets, and added the coordinate spaces directory.
 

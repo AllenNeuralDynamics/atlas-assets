@@ -158,6 +158,7 @@ The S3 bucket structure is organized as follows:
    │   └── <terminology_name>/
    │       └── <version>/
    │           ├── data_description.json                      (REQUIRED)
+   │           ├── manifest.json                              (REQUIRED)
    │           ├── terminology.parquet                        (OPTIONAL)
    │           ├── terminology.csv                            (REQUIRED)
    │           └── legacy_files/                              (OPTIONAL)

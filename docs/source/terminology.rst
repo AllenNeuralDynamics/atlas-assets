@@ -20,6 +20,7 @@ Only the terminology subtree of the global layout is shown here:
      └── <terminology_name>/
          └── <version>/
              ├── data_description.json (REQUIRED)
+             ├── manifest.json         (REQUIRED)
              ├── terminology.csv       (REQUIRED)
              ├── terminology.parquet   (OPTIONAL)
              └── legacy_files/         (OPTIONAL)
@@ -47,6 +48,14 @@ Files
 -----
 ``data_description.json``
   * Must validate against ``aind_data_schema >= 2.0``. Documents provenance, authorship, license, and high-level context.
+
+``manifest.json``
+  Identifies the terminology release. Minimal required keys (draft):
+
+  * ``name`` – terminology name
+  * ``version`` – terminology version
+  * ``location`` – path to the asset
+  * ``schema_version`` – version of the manifest contract
 
 ``terminology.csv``
   * Canonical tabular definition of the hierarchical set of terms.
