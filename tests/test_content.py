@@ -88,6 +88,7 @@ class MetadataTest(unittest.TestCase):
     """Tests for aind-data-schema metadata validation."""
 
     def _space(self, root, dd="{}", processing=None):
+        """Create a coordinate-space fixture under ``root``."""
         base = os.path.join(root, "coordinate-spaces", "x-space", "2015")
         _write(os.path.join(base, "data_description.json"), dd)
         _write(os.path.join(base, "manifest.json"), "{}")
@@ -137,6 +138,7 @@ class ManifestRefTest(unittest.TestCase):
     """Tests for manifest cross-reference resolution."""
 
     def _atlas(self, root, ref_location, version="2017"):
+        """Create an atlas fixture referencing ``ref_location``."""
         base = os.path.join(root, "atlases", "x-atlas", version)
         _write(os.path.join(base, "data_description.json"), "{}")
         manifest = (
@@ -204,12 +206,14 @@ class TerminologyCsvTest(unittest.TestCase):
     )
 
     def _term(self, root, csv_text, version="2020"):
+        """Create a terminology fixture with the given CSV text."""
         base = os.path.join(root, "terminologies", "x-terminology", version)
         _write(os.path.join(base, "data_description.json"), "{}")
         _write(os.path.join(base, "manifest.json"), "{}")
         _write(os.path.join(base, "terminology.csv"), csv_text)
 
     def _codes(self, csv_text):
+        """Return the finding codes for a terminology with ``csv_text``."""
         with tempfile.TemporaryDirectory() as root:
             self._term(root, csv_text)
             return _run(root, "terminologies", "x-terminology", "2020")
@@ -263,6 +267,7 @@ class OmeZarrTest(unittest.TestCase):
     """Tests for OME-Zarr metadata validation."""
 
     def _template(self, root, **kw):
+        """Create a template fixture with an OME-Zarr per ``kw``."""
         base = os.path.join(root, "templates", "x-template", "2015")
         _write(os.path.join(base, "data_description.json"), "{}")
         _write(os.path.join(base, "manifest.json"), "{}")
@@ -336,6 +341,7 @@ class OmeZarrTest(unittest.TestCase):
             )
 
     def _annotation(self, root, with_values):
+        """Create an annotation-set fixture, optionally with values."""
         base = os.path.join(root, "annotation-sets", "x-annotation", "2020")
         _write(os.path.join(base, "data_description.json"), "{}")
         _write(os.path.join(base, "manifest.json"), "{}")
@@ -369,6 +375,7 @@ class IntegrationTest(unittest.TestCase):
     """Tests wiring content checks through validate() and the CLI."""
 
     def _tree(self, root):
+        """Create a minimal valid terminology tree under ``root``."""
         base = os.path.join(root, "terminologies", "x-terminology", "2020")
         _write(os.path.join(base, "data_description.json"), "{}")
         _write(os.path.join(base, "manifest.json"), "{}")
