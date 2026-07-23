@@ -205,4 +205,5 @@ All computed assets (e.g. some templates) must have a processing.json at the top
    :caption: Additional Information
 
    example_atlas_assets
+   validator
    changelog
