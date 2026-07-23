@@ -65,7 +65,6 @@ ASSET_SPECS = {
         ],
         manifest_keys={
             "coordinate_space",
-            "alignment",
             "created",
             "schema_version",
         },
