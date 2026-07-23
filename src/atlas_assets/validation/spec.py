@@ -87,9 +87,14 @@ ASSET_SPECS = {
     ),
     "terminologies": AssetSpec(
         type_dir="terminologies",
-        required_files={"data_description.json", "terminology.csv"},
+        required_files={
+            "data_description.json",
+            "manifest.json",
+            "terminology.csv",
+        },
         optional_files={"terminology.parquet"},
         optional_dirs={"legacy_files"},
+        manifest_keys={"name", "version", "location", "schema_version"},
         name_suffix="-terminology",
     ),
     "coordinate-spaces": AssetSpec(
