@@ -82,6 +82,15 @@ ASSET_SPECS = {
         optional_file_patterns=[
             re.compile(r"^annotations_compressed_" + _RES + r"\.nii\.gz$")
         ],
+        manifest_keys={
+            "name",
+            "version",
+            "location",
+            "schema_version",
+            "coordinate_space",
+            "terminology",
+            "scales",
+        },
         name_suffix="-annotation",
     ),
     "terminologies": AssetSpec(
@@ -99,6 +108,15 @@ ASSET_SPECS = {
     "coordinate-spaces": AssetSpec(
         type_dir="coordinate-spaces",
         required_files={"data_description.json", "manifest.json"},
+        manifest_keys={
+            "name",
+            "version",
+            "location",
+            "schema_version",
+            "origin",
+            "spacing",
+            "template",
+        },
         name_suffix="-space",
     ),
     "coordinate-transformations": AssetSpec(
