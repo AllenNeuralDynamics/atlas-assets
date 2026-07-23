@@ -4,7 +4,7 @@ Atlas Asset Organization
 .. note::
    |spec_status|
 
-This document describes how brain atlas data assets are organized within an S3 bucket (``s3://allen-atlas-assets``), covering directory structure, naming conventions, data access patterns, and governance.
+This document describes how brain atlas data assets are organized within a folder or cloud object storage (``s3://allen-atlas-assets``), covering directory structure, naming conventions, data access patterns, and governance.
 
 .. seealso::
    For a history of changes to this specification, see the :doc:`changelog`.
