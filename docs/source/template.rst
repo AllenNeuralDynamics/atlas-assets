@@ -52,7 +52,6 @@ Files
 
     * ``coordinate_space`` – object with ``name`` and ``version``; also
       conveys the template that defined the coordinate space
-    * ``created`` – ISO 8601 date/time
     * ``schema_version`` – version of the manifest contract
 
 ``processing.json``
