@@ -14,3 +14,21 @@ space, template, annotation set, terminology, and coordinate transformation —
 and the layout that ties them together.
 
 See documentation for details: https://atlas-assets.readthedocs.io/en/latest/
+
+## Validator
+
+The package ships an optional validator that checks an atlas-assets tree
+(local directory or public S3 prefix) for spec compliance, reporting errors
+and warnings.
+
+```bash
+pip install atlas-assets[validate]
+
+atlas-assets-validate ./my-atlas-assets
+atlas-assets-validate s3://allen-atlas-assets/
+```
+
+Use `--format json` for machine-readable output and `--strict` to fail on
+warnings. See the
+[validator docs](https://atlas-assets.readthedocs.io/en/latest/validator.html)
+for details.
