@@ -5,6 +5,8 @@ Changelog
 This page tracks changes to the Atlas Asset Organization specification.
 
 **v0.1.4 — July 23, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.4/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.4>`__
+   Added an optional spec-compliance validator (``atlas-assets-validate``) that checks a local or cloud-stored asset tree and reports errors and warnings. See :doc:`validator`.
+
    Added the required ``manifest.json`` file to the terminology specification.
 
    Added the optional ``annotations_compressed_{resolution}.nii.gz`` file to the annotation set specification.
