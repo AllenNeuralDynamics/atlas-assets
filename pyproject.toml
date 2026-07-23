@@ -19,7 +19,13 @@ dynamic = ["version"]
 dependencies = [
 ]
 
+[project.scripts]
+atlas-assets-validate = "atlas_assets.validation.cli:main"
+
 [project.optional-dependencies]
+validate = [
+    "obstore",
+]
 dev = [
     "black",
     "coverage",
@@ -28,6 +34,7 @@ dev = [
     "isort",
     "Sphinx",
     "furo",
+    "obstore",
 ]
 
 [dependency-groups]
@@ -38,7 +45,8 @@ dev = [
     'interrogate',
     'isort',
     'Sphinx',
-    'furo'
+    'furo',
+    'obstore'
 ]
 
 [tool.setuptools.packages.find]
