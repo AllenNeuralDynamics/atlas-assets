@@ -42,7 +42,16 @@ Files
   Must validate against ``aind_data_schema >= 2.0``. Documents administrative metadata.
 
 ``manifest.json``
-  Documents the origin, spacing (including units), and defining anatomical template.
+  Documents the coordinate space. Minimal required keys (draft):
+
+  * ``name`` – coordinate space name
+  * ``version`` – coordinate space version
+  * ``location`` – path to the asset
+  * ``schema_version`` – version of the manifest contract
+  * ``origin`` – anatomical origin of the coordinate system
+  * ``spacing`` – physical voxel spacing, including units
+  * ``template`` – object (``name``, ``version``) identifying the
+    template that defines the space
 
 
 Versioning

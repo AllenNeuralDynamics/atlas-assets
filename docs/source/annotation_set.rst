@@ -67,7 +67,20 @@ Files
   * Columns: ``identifier``, ``voxel_count``, ``volume_mm3``
 
 ``manifest.json``
-  * References the terminology name/version and coordinate space version, including component paths.
+  Identifies the annotation set and its components. Minimal required
+  keys (draft):
+
+  * ``name`` – annotation set name
+  * ``version`` – annotation set version
+  * ``location`` – path to the asset
+  * ``schema_version`` – version of the manifest contract
+  * ``coordinate_space`` – object (``name``, ``version``) identifying the
+    coordinate space
+  * ``terminology`` – object (``name``, ``version``) identifying the
+    terminology
+  * ``template`` – (optional) object (``name``, ``version``) identifying
+    the reference template
+  * ``scales`` – list of resolutions available (e.g. ``[10, 25, 50, 100]``)
 
 ``data_description.json``
   * ``aind_data_schema >= 2.0``: includes administrative metadata, description, provenance, authorship, licensing, references
