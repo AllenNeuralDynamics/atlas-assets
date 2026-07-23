@@ -19,7 +19,6 @@ from atlas_assets.validation.store import AssetStore
 
 _TEMPLATE_MANIFEST = {
     "coordinate_space": {"name": "s", "version": "2015"},
-    "alignment": "defining",
     "created": "2015-01-01",
     "schema_version": "0.1.0",
 }
