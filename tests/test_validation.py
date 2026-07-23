@@ -69,6 +69,15 @@ class OpenStoreTest(unittest.TestCase):
         store = open_store("s3://bucket/prefix/")
         self.assertIsInstance(store, S3Store)
 
+    def test_exists_root_and_child(self):
+        """exists() is true for the root and known children."""
+        with tempfile.TemporaryDirectory() as root:
+            _valid_template(root)
+            store = LocalStore(root)
+            self.assertTrue(store.exists(""))
+            self.assertTrue(store.exists("templates"))
+            self.assertFalse(store.exists("nope"))
+
 
 class ValidatorTest(unittest.TestCase):
     """Tests for the structural validator."""
@@ -235,6 +244,8 @@ class AbstractStoreTest(unittest.TestCase):
             store.list()
         with self.assertRaises(NotImplementedError):
             store.read_text("x")
+        with self.assertRaises(NotImplementedError):
+            store.open_zarr_group("x")
         with self.assertRaises(NotImplementedError):
             store.location
 

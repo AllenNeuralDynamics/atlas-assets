@@ -4,6 +4,15 @@ Changelog
 
 This page tracks changes to the Atlas Asset Organization specification.
 
+**v0.1.5 — July 23, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.5/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.5>`__
+   Added content ("full") validation to the validator (``--level full``): aind-data-schema metadata validation, manifest cross-reference resolution, terminology CSV integrity, and OME-Zarr metadata checks. Requires the ``validate`` extra and Python 3.11+.
+
+   Enumerated the manifest keys for the coordinate space (``origin``, ``spacing``, ``template``) and annotation set (``coordinate_space``, ``terminology``, optional ``template``, ``scales``) specifications.
+
+   Removed the redundant ``alignment`` key from the template manifest; the relationship is conveyed by the ``coordinate_space`` reference.
+
+   Removed the redundant ``created`` key from the atlas and template manifests; the release timestamp is recorded in ``data_description.json``.
+
 **v0.1.4 — July 23, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.4/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.4>`__
    Added an optional spec-compliance validator (``atlas-assets-validate``) that checks a local or cloud-stored asset tree and reports errors and warnings. See :doc:`validator`.
 

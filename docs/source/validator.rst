@@ -27,6 +27,8 @@ Validate a local directory or an ``s3://`` prefix:
 
 Options:
 
+* ``--level {structural,full}`` – validation depth (default
+  ``structural``). ``full`` adds the content checks described below.
 * ``--format {text,json}`` – output format (default ``text``).
 * ``--strict`` – exit non-zero on warnings as well as errors.
 * ``--region`` – AWS region for ``s3://`` locations (default
@@ -56,11 +58,21 @@ Findings are either errors or warnings:
 * an unrecognized version-directory format;
 * a manifest that omits a draft "minimal required" key.
 
-Scope
------
-The validator currently performs **structural** validation — layout,
-required and optional files, naming, version directories, JSON
-parseability, and shallow manifest-key presence. Content-level checks
-(aind-data-schema validation, manifest cross-references, OME-Zarr
-metadata, and terminology CSV graph rules) are planned for a later
-release.
+Content checks (``--level full``)
+---------------------------------
+With ``--level full`` the validator also reads file contents:
+
+* **Metadata** – ``data_description.json`` and ``processing.json`` are
+  validated against aind-data-schema. This step is skipped with a note
+  if aind-data-schema is not installed.
+* **Manifest cross-references** – every ``manifest.json`` reference (by
+  ``location``) must resolve to an existing asset.
+* **Terminology CSV** – required columns, unique ``identifier`` and
+  ``annotation_value``, resolvable ``parent_identifier``, no cycles, and
+  ``#RRGGBB`` color values.
+* **OME-Zarr** – OME-Zarr version ≥ 0.5, spatial axes in millimeters,
+  compressed chunks, and the ``annotation_values`` array on annotation
+  sets.
+
+Content validation requires the ``validate`` extra (obstore, zarr,
+aind-data-schema) and Python 3.11+.

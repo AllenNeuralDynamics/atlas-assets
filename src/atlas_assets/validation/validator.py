@@ -9,6 +9,7 @@ shallow manifest-key presence. Content-level validation is out of scope.
 
 import json
 
+from atlas_assets.validation import content as content_rules
 from atlas_assets.validation.models import Finding, Report, Severity
 from atlas_assets.validation.spec import (
     ASSET_SPECS,
@@ -19,9 +20,36 @@ from atlas_assets.validation.spec import (
 from atlas_assets.validation.store import AssetStore
 
 
-def validate(store: AssetStore) -> Report:
-    """Validate an atlas-assets ``store`` and return a :class:`Report`."""
+def validate(store: AssetStore, content: bool = False) -> Report:
+    """Validate an atlas-assets ``store`` and return a :class:`Report`.
+
+    When ``content`` is true, content-level checks (metadata schema,
+    manifest cross-references, terminology CSV, OME-Zarr) run in
+    addition to the structural checks.
+    """
     report = Report(root=store.location)
+    ctx = None
+    if content:
+        ctx = content_rules.build_context()
+        if ctx.models is None:
+            report.add(
+                Finding(
+                    Severity.WARNING,
+                    "W100",
+                    "Metadata schema validation skipped: aind-data-schema "
+                    "is not installed (pip install "
+                    "atlas-assets[validate]).",
+                )
+            )
+        if not ctx.zarr_ok:
+            report.add(
+                Finding(
+                    Severity.WARNING,
+                    "W101",
+                    "OME-Zarr validation skipped: zarr is not installed "
+                    "(pip install atlas-assets[validate]).",
+                )
+            )
     for entry in store.list(""):
         if not entry.is_dir:
             report.add(
@@ -43,11 +71,19 @@ def validate(store: AssetStore) -> Report:
                 )
             )
         else:
-            _validate_type(store, ASSET_SPECS[entry.name], report)
+            _validate_type(
+                store, ASSET_SPECS[entry.name], report, content, ctx
+            )
     return report
 
 
-def _validate_type(store: AssetStore, spec: AssetSpec, report: Report) -> None:
+def _validate_type(
+    store: AssetStore,
+    spec: AssetSpec,
+    report: Report,
+    content: bool,
+    ctx,
+) -> None:
     """Validate every asset under a single asset-type directory."""
     for entry in store.list(spec.type_dir):
         asset_name = "{}/{}".format(spec.type_dir, entry.name)
@@ -87,7 +123,15 @@ def _validate_type(store: AssetStore, spec: AssetSpec, report: Report) -> None:
                 )
             )
         for version in version_dirs:
-            _validate_version(store, spec, entry.name, version.name, report)
+            _validate_version(
+                store,
+                spec,
+                entry.name,
+                version.name,
+                report,
+                content,
+                ctx,
+            )
 
 
 def _check_name(
@@ -122,6 +166,8 @@ def _validate_version(
     name: str,
     version: str,
     report: Report,
+    content: bool = False,
+    ctx=None,
 ) -> None:
     """Validate the contents of a single asset version directory."""
     asset = "{}/{}/{}".format(spec.type_dir, name, version)
@@ -177,6 +223,11 @@ def _validate_version(
 
     _check_unexpected(spec, files, dirs, asset, report)
     _check_required_json(store, spec, files, asset, report)
+
+    if content:
+        content_rules.check_version(
+            store, spec, asset, files, dirs, ctx, report
+        )
 
 
 def _check_unexpected(
