@@ -50,8 +50,8 @@ Files
 ``manifest.json``
   * References the Coordinate Space this template defines or is aligned to. Minimal required keys (draft):
 
-    * ``coordinate_space`` – object with ``name`` and ``version``
-    * ``alignment`` – this template's relationship to the Coordinate Space: ``defining`` (the template defines the space) or ``aligned`` (rigidly/affinely aligned to it)
+    * ``coordinate_space`` – object with ``name`` and ``version``; also
+      conveys the template that defined the coordinate space
     * ``created`` – ISO 8601 date/time
     * ``schema_version`` – version of the manifest contract
 
