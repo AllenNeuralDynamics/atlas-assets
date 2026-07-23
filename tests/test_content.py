@@ -401,7 +401,12 @@ class IntegrationTest(unittest.TestCase):
         """The CLI runs content checks at --level full."""
         with tempfile.TemporaryDirectory() as root:
             self._tree(root)
-            self.assertEqual(main([root, "--level", "full"]), 0)
+            # Keep this independent of whether aind-data-schema is
+            # installed: the stub fixtures are not real metadata.
+            with mock.patch.object(
+                content_rules, "load_schema_models", return_value=None
+            ):
+                self.assertEqual(main([root, "--level", "full"]), 0)
 
 
 if __name__ == "__main__":
