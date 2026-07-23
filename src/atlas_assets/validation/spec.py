@@ -50,7 +50,6 @@ ASSET_SPECS = {
             "coordinate_space",
             "templates",
             "annotation_sets",
-            "created",
             "schema_version",
         },
         name_suffix="-atlas",
@@ -65,7 +64,6 @@ ASSET_SPECS = {
         ],
         manifest_keys={
             "coordinate_space",
-            "created",
             "schema_version",
         },
         name_suffix="-template",

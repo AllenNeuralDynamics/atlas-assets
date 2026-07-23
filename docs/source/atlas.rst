@@ -50,7 +50,6 @@ Files
   * ``coordinate_space`` – object with ``name`` and ``version``
   * ``templates`` – list of objects, each with ``name`` and ``version``
   * ``annotation_sets`` – list of objects, each with ``name`` and ``version`` (terminology is referenced by the annotation set itself)
-  * ``created`` – ISO 8601 date/time of atlas release
   * ``schema_version`` – version of future ``atlas-schema`` manifest contract
 
 Validation Rules
