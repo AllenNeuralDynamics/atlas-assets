@@ -68,6 +68,16 @@ def build_parser() -> argparse.ArgumentParser:
         help="Output format (default: text).",
     )
     parser.add_argument(
+        "--level",
+        choices=["structural", "full"],
+        default="structural",
+        help=(
+            "Validation depth: 'structural' (layout only, default) or "
+            "'full' (also content: schema, cross-references, "
+            "terminology CSV, OME-Zarr). 'full' needs the validate extra."
+        ),
+    )
+    parser.add_argument(
         "--strict",
         action="store_true",
         help="Exit non-zero on warnings as well as errors.",
@@ -84,7 +94,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     """Run the validator CLI and return a process exit code."""
     args = build_parser().parse_args(argv)
     store = open_store(args.location, region=args.region)
-    report = validate(store)
+    report = validate(store, content=args.level == "full")
     if args.format == "json":
         print(_format_json(report))
     else:

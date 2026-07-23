@@ -37,6 +37,19 @@ def _require_obstore():
         ) from exc
 
 
+def _require_zarr():
+    """Import and return the zarr module, or raise a helpful error."""
+    try:
+        import zarr
+
+        return zarr
+    except ImportError as exc:  # pragma: no cover
+        raise ImportError(
+            "OME-Zarr validation requires zarr. Install it with "
+            "'pip install atlas-assets[validate]'."
+        ) from exc
+
+
 class AssetStore:
     """Abstract read-only view over an atlas-assets tree."""
 
@@ -46,6 +59,18 @@ class AssetStore:
 
     def read_text(self, path: str) -> str:
         """Read the file at ``path`` as UTF-8 text."""
+        raise NotImplementedError
+
+    def exists(self, path: str) -> bool:
+        """Return whether ``path`` exists as a file or directory."""
+        rel = path.strip("/")
+        if not rel:
+            return True
+        parent, _, name = rel.rpartition("/")
+        return any(entry.name == name for entry in self.list(parent))
+
+    def open_zarr_group(self, path: str):
+        """Open the OME-Zarr group at ``path`` read-only via zarr."""
         raise NotImplementedError
 
     @property
@@ -85,6 +110,17 @@ class _ObstoreStore(AssetStore):
         obstore = _require_obstore()
         response = obstore.get(self._store, path.strip("/"))
         return bytes(response.bytes()).decode("utf-8")
+
+    def open_zarr_group(self, path: str):
+        """Open the OME-Zarr group at ``path`` read-only via zarr."""
+        zarr = _require_zarr()
+        from zarr.storage import ObjectStore
+
+        return zarr.open_group(
+            store=ObjectStore(self._store, read_only=True),
+            path=path.strip("/"),
+            mode="r",
+        )
 
     @property
     def location(self) -> str:
