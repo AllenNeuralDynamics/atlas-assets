@@ -430,6 +430,14 @@ class ModalityScopeTest(unittest.TestCase):
                         "E102", _run(root, type_dir, name, "2015")
                     )
 
+    def test_non_object_json_ignored(self):
+        """Metadata that is not a JSON object is reported as E100, not here."""
+        with tempfile.TemporaryDirectory() as root:
+            self._asset(root, "coordinate-spaces", "x-space", "[]")
+            self.assertNotIn(
+                "E102", _run(root, "coordinate-spaces", "x-space", "2015")
+            )
+
     def test_malformed_json_does_not_raise(self):
         """Unparseable metadata is reported elsewhere, not here."""
         with tempfile.TemporaryDirectory() as root:
