@@ -65,6 +65,11 @@ With ``--level full`` the validator also reads file contents:
 * **Metadata** – ``data_description.json`` and ``processing.json`` are
   validated against aind-data-schema. This step is skipped with a note
   if aind-data-schema is not installed.
+* **Modality scope** – ``modalities`` in ``data_description.json`` must be
+  empty for annotation sets, terminologies, coordinate spaces and
+  coordinate transformations. A modality records how a volume was
+  acquired, so it belongs only to templates and to the atlases that
+  compose them.
 * **Manifest cross-references** – every ``manifest.json`` reference (by
   ``location``) must resolve to an existing asset.
 * **Terminology CSV** – required columns, unique ``identifier`` and
