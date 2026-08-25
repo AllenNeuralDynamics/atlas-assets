@@ -74,6 +74,7 @@ def build_context():
 def check_version(store, spec, asset, files, dirs, ctx, report):
     """Run all content checks for a single asset version."""
     _check_metadata(store, asset, files, ctx.models, report)
+    _check_modality(store, spec, asset, files, report)
     _check_manifest_refs(store, asset, files, report)
     if spec.type_dir == "terminologies":
         _check_terminology_csv(store, asset, files, report)
@@ -104,6 +105,45 @@ def _check_metadata(store, asset, files, models, report):
                     path=f"{asset}/{name}",
                 )
             )
+
+
+def _check_modality(store, spec, asset, files, report):
+    """Reject modalities on asset types that are not acquisitions.
+
+    A modality records how a volume was imaged, so it belongs to templates
+    and to the atlases that compose them. Annotation sets, terminologies,
+    coordinate spaces and transformations are parcellations, vocabularies,
+    mathematical spaces and mappings; a modality on one of those is
+    inherited metadata rather than a fact about the asset.
+    """
+    if spec.allows_modality or "data_description.json" not in files:
+        return
+    path = f"{asset}/data_description.json"
+    try:
+        data = json.loads(store.read_text(path))
+    except (ValueError, OSError):
+        return  # malformed JSON is already reported elsewhere
+    if not isinstance(data, dict):
+        return
+    modalities = data.get("modalities") or []
+    if not modalities:
+        return
+    names = ", ".join(
+        str(m.get("abbreviation") or m.get("name"))
+        if isinstance(m, dict) else str(m)
+        for m in modalities
+    )
+    report.add(
+        Finding(
+            Severity.ERROR,
+            "E102",
+            "data_description.json declares modalities ({}), but a "
+            "'{}' asset is not an acquisition and must leave "
+            "'modalities' empty.".format(names, spec.type_dir),
+            asset=asset,
+            path=path,
+        )
+    )
 
 
 def _iter_refs(obj):

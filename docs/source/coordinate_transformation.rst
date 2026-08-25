@@ -47,6 +47,7 @@ Files
 -----
 ``data_description.json``
   * Conforms to ``aind_data_schema >= 2.0``.
+  * ``modalities`` must be empty. A transformation is a mapping between spaces, not an acquisition.
   * Describes purpose, provenance, authorship, licensing, source & target references.
 
 ``processing.json``

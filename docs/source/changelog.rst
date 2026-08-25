@@ -4,6 +4,11 @@ Changelog
 
 This page tracks changes to the Atlas Asset Organization specification.
 
+**v0.1.6 — August 24, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.6/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.6>`__
+   Scoped ``modalities`` to acquisitions. A modality records how a volume was imaged, so it belongs to templates and to the atlases that compose them. Annotation sets, terminologies, coordinate spaces and coordinate transformations are parcellations, vocabularies, mathematical spaces and mappings; their ``data_description.json`` must leave ``modalities`` empty.
+
+   The validator enforces this under ``--level full`` and reports ``E102`` when a non-acquisition asset declares a modality.
+
 **v0.1.5 — July 23, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.5/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.5>`__
    Added content ("full") validation to the validator (``--level full``): aind-data-schema metadata validation, manifest cross-reference resolution, terminology CSV integrity, and OME-Zarr metadata checks. Requires the ``validate`` extra and Python 3.11+.
 

@@ -40,6 +40,11 @@ class AssetSpec:
     # When True, arbitrary extra files are permitted (e.g. ANTs outputs
     # under coordinate-transformations) and not flagged as unexpected.
     allow_extra: bool = False
+    # Whether ``data_description.json`` may declare modalities. A modality
+    # records how a volume was acquired, so it belongs only to asset types
+    # that are images: templates, and the atlases that compose them.
+    # Parcellations, vocabularies, spaces and mappings are not acquisitions.
+    allows_modality: bool = False
 
 
 ASSET_SPECS = {
@@ -53,6 +58,7 @@ ASSET_SPECS = {
             "schema_version",
         },
         name_suffix="-atlas",
+        allows_modality=True,
     ),
     "templates": AssetSpec(
         type_dir="templates",
@@ -67,6 +73,7 @@ ASSET_SPECS = {
             "schema_version",
         },
         name_suffix="-template",
+        allows_modality=True,
     ),
     "annotation-sets": AssetSpec(
         type_dir="annotation-sets",

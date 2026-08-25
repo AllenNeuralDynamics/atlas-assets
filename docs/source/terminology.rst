@@ -48,6 +48,7 @@ Files
 -----
 ``data_description.json``
   * Must validate against ``aind_data_schema >= 2.0``. Documents provenance, authorship, license, and high-level context.
+  * ``modalities`` must be empty. A terminology is a vocabulary, not an acquisition.
 
 ``manifest.json``
   Identifies the terminology release. Minimal required keys (draft):

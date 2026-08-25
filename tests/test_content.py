@@ -371,6 +371,74 @@ class OmeZarrTest(unittest.TestCase):
             )
 
 
+class ModalityScopeTest(unittest.TestCase):
+    """Modality belongs only to asset types that are acquisitions."""
+
+    SPIM = '{"modalities": [{"name": "SPIM", "abbreviation": "SPIM"}]}'
+
+    def _asset(self, root, type_dir, name, dd):
+        """Write a minimal asset of ``type_dir`` with the given metadata."""
+        base = os.path.join(root, type_dir, name, "2015")
+        _write(os.path.join(base, "data_description.json"), dd)
+        _write(os.path.join(base, "manifest.json"), "{}")
+        return base
+
+    def test_non_acquisition_types_reject_modalities(self):
+        """A modality on a non-acquisition asset type yields E102."""
+        cases = {
+            "coordinate-spaces": "x-space",
+            "annotation-sets": "x-annotation",
+            "terminologies": "x-terminology",
+            "coordinate-transformations": "a_to_b",
+        }
+        for type_dir, name in cases.items():
+            with self.subTest(type_dir=type_dir):
+                with tempfile.TemporaryDirectory() as root:
+                    self._asset(root, type_dir, name, self.SPIM)
+                    self.assertIn(
+                        "E102", _run(root, type_dir, name, "2015")
+                    )
+
+    def test_empty_modalities_allowed(self):
+        """An empty list is the expected representation and passes."""
+        with tempfile.TemporaryDirectory() as root:
+            self._asset(
+                root, "coordinate-spaces", "x-space", '{"modalities": []}'
+            )
+            self.assertNotIn(
+                "E102", _run(root, "coordinate-spaces", "x-space", "2015")
+            )
+
+    def test_absent_modalities_allowed(self):
+        """A document with no modalities key at all passes."""
+        with tempfile.TemporaryDirectory() as root:
+            self._asset(root, "coordinate-spaces", "x-space", "{}")
+            self.assertNotIn(
+                "E102", _run(root, "coordinate-spaces", "x-space", "2015")
+            )
+
+    def test_acquisition_types_allow_modalities(self):
+        """Templates and atlases are images and may declare a modality."""
+        for type_dir, name in (
+            ("templates", "x-template"),
+            ("atlases", "x-atlas"),
+        ):
+            with self.subTest(type_dir=type_dir):
+                with tempfile.TemporaryDirectory() as root:
+                    self._asset(root, type_dir, name, self.SPIM)
+                    self.assertNotIn(
+                        "E102", _run(root, type_dir, name, "2015")
+                    )
+
+    def test_malformed_json_does_not_raise(self):
+        """Unparseable metadata is reported elsewhere, not here."""
+        with tempfile.TemporaryDirectory() as root:
+            self._asset(root, "coordinate-spaces", "x-space", "{not json")
+            self.assertNotIn(
+                "E102", _run(root, "coordinate-spaces", "x-space", "2015")
+            )
+
+
 class IntegrationTest(unittest.TestCase):
     """Tests wiring content checks through validate() and the CLI."""
 

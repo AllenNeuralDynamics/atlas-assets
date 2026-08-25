@@ -41,6 +41,8 @@ Files
 ``data_description.json``
   Must validate against ``aind_data_schema >= 2.0``. Documents administrative metadata.
 
+  ``modalities`` must be empty. A modality records how a volume was acquired; a coordinate space is a mathematical space, not an acquisition.
+
 ``manifest.json``
   Documents the coordinate space. Minimal required keys (draft):
 
