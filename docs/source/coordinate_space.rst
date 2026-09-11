@@ -50,6 +50,7 @@ Files
   * ``version`` – coordinate space version
   * ``location`` – path to the asset
   * ``schema_version`` – version of the manifest contract
+  * ``described_by`` – URL of the specification of this asset type
   * ``origin`` – anatomical origin of the coordinate system
   * ``spacing`` – physical voxel spacing, including units
   * ``template`` – object (``name``, ``version``) identifying the

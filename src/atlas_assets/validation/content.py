@@ -5,6 +5,8 @@ These checks read file contents and require the ``validate`` extra:
 * metadata: ``data_description.json`` / ``processing.json`` against
   aind-data-schema (skipped with a note if that package is absent);
 * manifest cross-references resolve to existing assets;
+* a manifest's ``described_by`` URL points at the specification page
+  for its asset type;
 * ``terminology.csv`` integrity (columns and the identifier graph);
 * OME-Zarr metadata (version, units, axes, compression,
   ``annotation_values``).
@@ -14,6 +16,7 @@ import csv
 import io
 import json
 import re
+from urllib.parse import urlparse
 
 from atlas_assets.validation.models import Finding, Severity
 
@@ -76,6 +79,7 @@ def check_version(store, spec, asset, files, dirs, ctx, report):
     _check_metadata(store, asset, files, ctx.models, report)
     _check_modality(store, spec, asset, files, report)
     _check_manifest_refs(store, asset, files, report)
+    _check_described_by(store, spec, asset, files, report)
     if spec.type_dir == "terminologies":
         _check_terminology_csv(store, asset, files, report)
     if ctx.zarr_ok:
@@ -184,6 +188,52 @@ def _check_manifest_refs(store, asset, files, report):
                     path=location,
                 )
             )
+
+
+def _check_described_by(store, spec, asset, files, report):
+    """Check the manifest's ``described_by`` URL for an asset type.
+
+    ``described_by`` records where the manifest contract is documented,
+    so a manifest read on its own still leads back to the specification
+    it was written against. A missing key is reported structurally as
+    W041; this check validates the value that is there.
+    """
+    if "manifest.json" not in files:
+        return
+    path = f"{asset}/manifest.json"
+    try:
+        data = json.loads(store.read_text(path))
+    except (ValueError, OSError):
+        return  # malformed JSON is already reported in Phase 1
+    if not isinstance(data, dict) or "described_by" not in data:
+        return  # a non-object (W040) or absent key (W041) is reported
+    url = data["described_by"]
+    try:
+        parsed = urlparse(url) if isinstance(url, str) else None
+    except ValueError:
+        parsed = None  # e.g. a malformed IPv6 host
+    if not parsed or parsed.scheme not in ("http", "https"):
+        _add(
+            report,
+            Severity.ERROR,
+            "E103",
+            "described_by must be an absolute http(s) URL describing the "
+            "asset specification, not {!r}.".format(url),
+            asset,
+            path,
+        )
+        return
+    page = parsed.path.rsplit("/", 1)[-1]
+    if page != spec.docs_page:
+        _add(
+            report,
+            Severity.WARNING,
+            "W042",
+            "described_by should point at the '{}' specification page "
+            "'{}', not '{}'.".format(spec.type_dir, spec.docs_page, page),
+            asset,
+            path,
+        )
 
 
 def _check_terminology_csv(store, asset, files, report):

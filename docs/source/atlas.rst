@@ -51,6 +51,7 @@ Files
   * ``templates`` – list of objects, each with ``name`` and ``version``
   * ``annotation_sets`` – list of objects, each with ``name`` and ``version`` (terminology is referenced by the annotation set itself)
   * ``schema_version`` – version of future ``atlas-schema`` manifest contract
+  * ``described_by`` – URL of the specification of this asset type
 
 Validation Rules
 ----------------

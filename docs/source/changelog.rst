@@ -4,6 +4,11 @@ Changelog
 
 This page tracks changes to the Atlas Asset Organization specification.
 
+**v0.2.0 — September 11, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.2.0/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.2.0>`__
+   Required a ``described_by`` field in every ``manifest.json``, holding the URL of the specification of that asset type. ``schema_version`` records which version of the manifest contract applies; ``described_by`` records where that contract is documented, so a manifest read outside its asset tree still points back to the specification.
+
+   The validator reports ``W041`` when ``described_by`` is absent, like any other missing minimal manifest key. Under ``--level full`` it also reports ``E103`` when the value is not an absolute ``http(s)`` URL and ``W042`` when the URL does not point at the asset type's specification page.
+
 **v0.1.6 — August 24, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.1.6/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.1.6>`__
    Scoped ``modalities`` to acquisitions. A modality records how a volume was imaged, so it belongs to templates and to the atlases that compose them. Annotation sets, terminologies, coordinate spaces and coordinate transformations are parcellations, vocabularies, mathematical spaces and mappings; their ``data_description.json`` must leave ``modalities`` empty.
 

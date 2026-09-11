@@ -15,12 +15,14 @@ from atlas_assets.validation import (
     validate,
 )
 from atlas_assets.validation.cli import main
+from atlas_assets.validation.spec import described_by_url
 from atlas_assets.validation.store import AssetStore
 
 _TEMPLATE_MANIFEST = {
     "coordinate_space": {"name": "s", "version": "2015"},
     "created": "2015-01-01",
     "schema_version": "0.1.0",
+    "described_by": described_by_url("templates"),
 }
 
 
@@ -155,6 +157,19 @@ class ValidatorTest(unittest.TestCase):
             _write(os.path.join(base, "manifest.json"), "{}")
             report = validate(LocalStore(root))
             self.assertIn("W041", _codes(report))
+
+    def test_missing_described_by_is_warning(self):
+        """A manifest without described_by triggers W041 for that key."""
+        with tempfile.TemporaryDirectory() as root:
+            base = _valid_template(root)
+            manifest = dict(_TEMPLATE_MANIFEST)
+            del manifest["described_by"]
+            _write(os.path.join(base, "manifest.json"), json.dumps(manifest))
+            report = validate(LocalStore(root))
+            missing = [f for f in report.findings if f.code == "W041"]
+            self.assertEqual(len(missing), 1)
+            self.assertIn("described_by", missing[0].message)
+            self.assertFalse(report.has_errors)
 
     def test_no_version_dir_is_error(self):
         """An asset name with no version directory triggers E010."""

@@ -72,6 +72,13 @@ With ``--level full`` the validator also reads file contents:
   compose them.
 * **Manifest cross-references** – every ``manifest.json`` reference (by
   ``location``) must resolve to an existing asset.
+* **Described-by URL** – a ``manifest.json`` that declares ``described_by``
+  must give an absolute ``http(s)`` URL (``E103`` otherwise), and that URL
+  should point at the specification page for the asset type (``W042``
+  otherwise). Only the final path segment is compared, so a pinned
+  version, ``latest``, ``stable`` or a self-hosted copy of the docs all
+  pass. A manifest that omits ``described_by`` entirely is reported
+  structurally as ``W041``, like any other missing minimal manifest key.
 * **Terminology CSV** – required columns, unique ``identifier`` and
   ``annotation_value``, resolvable ``parent_identifier``, no cycles, and
   ``#RRGGBB`` color values.
