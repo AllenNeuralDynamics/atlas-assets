@@ -53,8 +53,8 @@ Files
     * ``coordinate_space`` – object with ``name`` and ``version``; also
       conveys the template that defined the coordinate space
     * ``schema_version`` – version of the manifest contract
-    * ``described_by`` – URL of the specification page for this asset
-      type: |spec_url_template|
+    * ``described_by`` – URL of the page in this specification that
+      describes this asset type
 
 ``processing.json``
   * Averaging / registration methods; reference datasets
