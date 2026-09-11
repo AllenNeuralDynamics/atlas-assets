@@ -57,6 +57,8 @@ Files
   * ``source`` – object with template name/version & coordinate space name/version
   * ``target`` – object with template name/version & coordinate space name/version
   * ``directionality`` – ``one-way`` | ``bidirectional``
+  * ``described_by`` – URL of the specification page for this asset type:
+    |spec_url_coordinate_transformation|
 
 ``coordinate_transformations.ome.zarr``
   * OME-Zarr >= 0.5 container encoding transformation chain using multiscale / coordinateTransformations metadata. Can contain:

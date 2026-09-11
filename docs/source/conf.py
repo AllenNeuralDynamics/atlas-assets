@@ -25,11 +25,32 @@ version = package_version
 # the version is rendered separately by _templates/sidebar/brand.html.
 html_title = project
 
-# Make the package version available to the docs as a substitution so the
-# status banner stays in sync with the release (see index.rst).
-rst_prolog = f"""
-.. |spec_status| replace:: **Status: Released — v{package_version}**
-"""
+# Make the package version available to the docs as substitutions so the
+# status banner (see index.rst) and the canonical ``described_by`` URLs
+# quoted on the asset pages stay in sync with the release. Each
+# ``|spec_url_<page>|`` substitution is a complete URL: docutils turns a
+# standalone URL into a link, so the page must be part of the substitution
+# rather than appended after it.
+SPEC_URL = f"https://atlas-assets.readthedocs.io/en/v{package_version}"
+
+SPEC_PAGES = (
+    "atlas",
+    "template",
+    "annotation_set",
+    "terminology",
+    "coordinate_space",
+    "coordinate_transformation",
+)
+
+rst_prolog = "\n".join(
+    [
+        f".. |spec_status| replace:: **Status: Released — v{package_version}**"
+    ]
+    + [
+        f".. |spec_url_{page}| replace:: {SPEC_URL}/{page}.html"
+        for page in SPEC_PAGES
+    ]
+)
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

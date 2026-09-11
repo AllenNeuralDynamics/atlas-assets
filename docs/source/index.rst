@@ -185,6 +185,8 @@ All data assets must have a data_description.json file at the top level of the a
 
 All computed assets (e.g. some templates) must have a processing.json at the top level of the asset folder that is valid according to aind-data-schema.
 
+Every ``manifest.json`` must include a ``described_by`` field holding the URL of the specification page that describes its asset type. A manifest is often read on its own — copied out of the tree, cached in a database, embedded in a viewer — and ``described_by`` is what leads a reader back to the contract it was written against. Where ``schema_version`` records *which* version of the manifest contract applies, ``described_by`` records *where* that contract is documented. The canonical value is the asset type's page in this specification at the version the manifest follows, for example |spec_url_atlas| for an atlas.
+
 .. seealso::
    For examples of actual atlas assets and their naming, see :doc:`example_atlas_assets`.
 
