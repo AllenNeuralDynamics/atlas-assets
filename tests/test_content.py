@@ -1,5 +1,6 @@
 """Tests for Phase 2 content validation."""
 
+import json
 import os
 import tempfile
 import unittest
@@ -10,7 +11,7 @@ import zarr
 from atlas_assets.validation import content as content_rules
 from atlas_assets.validation.cli import main
 from atlas_assets.validation.models import Report
-from atlas_assets.validation.spec import ASSET_SPECS
+from atlas_assets.validation.spec import ASSET_SPECS, described_by_url
 from atlas_assets.validation.store import LocalStore
 from atlas_assets.validation.validator import validate
 
@@ -369,6 +370,92 @@ class OmeZarrTest(unittest.TestCase):
                 "E111",
                 _run(root, "annotation-sets", "x-annotation", "2020"),
             )
+
+
+class DescribedByTest(unittest.TestCase):
+    """A manifest's described_by must point at its specification page."""
+
+    def _asset(self, root, type_dir, name, manifest):
+        """Write a minimal asset of ``type_dir`` with ``manifest`` text."""
+        base = os.path.join(root, type_dir, name, "2015")
+        _write(os.path.join(base, "data_description.json"), "{}")
+        _write(os.path.join(base, "manifest.json"), manifest)
+        return base
+
+    def _codes(self, manifest, type_dir="atlases", name="x-atlas"):
+        """Return the finding codes for a manifest with ``manifest``."""
+        with tempfile.TemporaryDirectory() as root:
+            self._asset(root, type_dir, name, manifest)
+            return _run(root, type_dir, name, "2015")
+
+    def _manifest(self, value):
+        """Return manifest text whose described_by is ``value``."""
+        return json.dumps({"described_by": value})
+
+    def test_canonical_url_passes(self):
+        """The URL from described_by_url() validates for every type."""
+        for type_dir, name in (
+            ("atlases", "x-atlas"),
+            ("templates", "x-template"),
+            ("annotation-sets", "x-annotation"),
+            ("terminologies", "x-terminology"),
+            ("coordinate-spaces", "x-space"),
+            ("coordinate-transformations", "a_to_b"),
+        ):
+            with self.subTest(type_dir=type_dir):
+                manifest = self._manifest(described_by_url(type_dir))
+                codes = self._codes(manifest, type_dir, name)
+                self.assertNotIn("E103", codes)
+                self.assertNotIn("W042", codes)
+
+    def test_unpinned_docs_version_passes(self):
+        """Only the page is compared, so 'latest' and mirrors pass."""
+        for url in (
+            "https://atlas-assets.readthedocs.io/en/latest/atlas.html",
+            "http://docs.example.org/atlas-assets/atlas.html",
+        ):
+            with self.subTest(url=url):
+                self.assertEqual(self._codes(self._manifest(url)), set())
+
+    def test_wrong_page_is_warning(self):
+        """A URL for another asset type's page yields W042."""
+        manifest = self._manifest(described_by_url("templates"))
+        self.assertIn("W042", self._codes(manifest))
+
+    def test_relative_url_is_error(self):
+        """A value that is not an absolute http(s) URL yields E103."""
+        for value in ("atlas.html", "see the docs", "", 42, None):
+            with self.subTest(value=value):
+                self.assertIn("E103", self._codes(self._manifest(value)))
+
+    def test_unparseable_url_is_error(self):
+        """A URL that urlparse rejects yields E103, not a crash."""
+        manifest = self._manifest("https://[::1/atlas.html")
+        self.assertIn("E103", self._codes(manifest))
+
+    def test_absent_key_is_not_checked_here(self):
+        """A missing described_by is reported structurally as W041."""
+        codes = self._codes("{}")
+        self.assertNotIn("E103", codes)
+        self.assertNotIn("W042", codes)
+
+    def test_non_object_manifest_ignored(self):
+        """A manifest that is not a JSON object is reported as W040."""
+        self.assertEqual(self._codes("[]"), set())
+
+    def test_missing_manifest_is_skipped(self):
+        """No manifest.json means no described_by check."""
+        report = Report()
+        content_rules._check_described_by(
+            None, ASSET_SPECS["atlases"], "atlases/x/2015", set(), report
+        )
+        self.assertEqual(report.findings, [])
+
+    def test_described_by_url_normalizes_version(self):
+        """The helper accepts a bare or 'v'-prefixed spec version."""
+        expected = "https://atlas-assets.readthedocs.io/en/v0.2.0/atlas.html"
+        self.assertEqual(described_by_url("atlases", "0.2.0"), expected)
+        self.assertEqual(described_by_url("atlases", "v0.2.0"), expected)
 
 
 class ModalityScopeTest(unittest.TestCase):
