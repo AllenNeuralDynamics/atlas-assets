@@ -192,6 +192,32 @@ class ValidatorTest(unittest.TestCase):
             report = validate(LocalStore(root))
             self.assertEqual(report.findings, [])
 
+    def test_annotation_set_scales_is_optional(self):
+        """An annotation set manifest without scales produces no findings."""
+        with tempfile.TemporaryDirectory() as root:
+            base = os.path.join(
+                root,
+                "annotation-sets",
+                "allen-adult-mouse-annotation",
+                "2017",
+            )
+            _write(os.path.join(base, "data_description.json"), "{}")
+            manifest = {
+                "name": "allen-adult-mouse-annotation",
+                "version": "2017",
+                "location": "/annotation-sets/allen-adult-mouse-annotation"
+                "/2017",
+                "schema_version": "0.2.1",
+                "described_by": described_by_url("annotation-sets"),
+                "coordinate_space": {"name": "s", "version": "2015"},
+                "terminology": {"name": "t", "version": "2017"},
+            }
+            _write(os.path.join(base, "manifest.json"), json.dumps(manifest))
+            for d in ("annotations.ome.zarr", "annotations.precomputed"):
+                os.makedirs(os.path.join(base, d))
+            report = validate(LocalStore(root))
+            self.assertEqual(report.findings, [])
+
     def test_space_manifest_without_spacing_is_valid(self):
         """A coordinate space manifest needs no spacing key."""
         with tempfile.TemporaryDirectory() as root:

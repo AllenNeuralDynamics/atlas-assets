@@ -110,7 +110,6 @@ ASSET_SPECS = {
             "described_by",
             "coordinate_space",
             "terminology",
-            "scales",
         },
         name_suffix="-annotation",
         docs_page="annotation_set.html",
