@@ -274,8 +274,8 @@ def _check_origin(store, asset, files, report):
             report,
             Severity.ERROR,
             "E104",
-            "origin must be an [x, y, z] coordinate of three numbers in "
-            "millimeters, not {!r}.".format(origin),
+            "origin must be an [x, y, z] coordinate of three numbers, "
+            "not {!r}.".format(origin),
             asset,
             path,
         )
