@@ -5,8 +5,6 @@ Coordinate Space
 
 A Coordinate Space (anatomical space) defines the mathematical frame in which anatomical data are expressed: origin, axis directions/orientation, physical units, and (optionally) an associated reference template image. Images are considered to reside in the same Coordinate Space when they are at least affine-aligned (same orientation, origin, and scaling) to the defining template/reference.
 
-A Coordinate Space has no voxel spacing. Spacing maps pixels to physical coordinates and is a property of an image expressed in the space, such as a :doc:`template` or an annotation volume. What must agree between a template and the annotations drawn on it is their physical coordinates, not their voxels.
-
 A Coordinate Space is defined by one template, recorded in its manifest. Other templates can be aligned to the same space; each references the space from its own manifest.
 
 .. seealso::
