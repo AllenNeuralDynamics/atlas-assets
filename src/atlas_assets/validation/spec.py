@@ -85,7 +85,6 @@ ASSET_SPECS = {
             "coordinate_space",
             "schema_version",
             "described_by",
-            "scales",
         },
         name_suffix="-template",
         allows_modality=True,

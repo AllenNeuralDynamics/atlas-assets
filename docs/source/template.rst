@@ -54,8 +54,9 @@ Files
       conveys the template that defined the coordinate space
     * ``schema_version`` – version of the manifest contract
     * ``described_by`` – URL of the specification of this asset type
-    * ``scales`` – list of voxel spacings (resolutions) available (e.g.
-      ``[10, 25, 50, 100]``)
+    * ``scales`` – (optional) list of voxel spacings (resolutions)
+      available (e.g. ``[10, 25, 50, 100]``). The OME-Zarr multiscales
+      metadata remains the authoritative record of each level's spacing.
 
 ``processing.json``
   * Averaging / registration methods; reference datasets

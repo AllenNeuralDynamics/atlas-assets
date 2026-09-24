@@ -5,7 +5,7 @@ Changelog
 This page tracks changes to the Atlas Asset Organization specification.
 
 **v0.2.1 — September 24, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.2.1/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.2.1>`__
-   Removed ``spacing`` from the coordinate space manifest. Voxel spacing maps pixels to physical coordinates, so it belongs to the images expressed in a space, not to the space. Added ``scales``, the list of available voxel spacings, to the template manifest, matching the annotation set manifest.
+   Removed ``spacing`` from the coordinate space manifest. Voxel spacing maps pixels to physical coordinates, so it belongs to the images expressed in a space, not to the space. Added an optional ``scales`` key, the list of available voxel spacings, to the template manifest; the OME-Zarr multiscales metadata remains the authoritative record of spacing.
 
    Clarified coordinate space versioning. A new species or age group requires a new space. A new version of the defining template, or a different template (for example, another imaging modality) becoming the defining template, produces a new version of the space while coordinates stay comparable. The template specification now states how each template change affects its coordinate space.
 

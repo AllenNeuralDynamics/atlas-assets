@@ -182,17 +182,15 @@ class ValidatorTest(unittest.TestCase):
             self.assertIn("described_by", missing[0].message)
             self.assertFalse(report.has_errors)
 
-    def test_missing_template_scales_is_warning(self):
-        """A template manifest without scales triggers W041 for that key."""
+    def test_template_scales_is_optional(self):
+        """A template manifest without scales produces no findings."""
         with tempfile.TemporaryDirectory() as root:
             base = _valid_template(root)
             manifest = dict(_TEMPLATE_MANIFEST)
             del manifest["scales"]
             _write(os.path.join(base, "manifest.json"), json.dumps(manifest))
             report = validate(LocalStore(root))
-            missing = [f for f in report.findings if f.code == "W041"]
-            self.assertEqual(len(missing), 1)
-            self.assertIn("scales", missing[0].message)
+            self.assertEqual(report.findings, [])
 
     def test_space_manifest_without_spacing_is_valid(self):
         """A coordinate space manifest needs no spacing key."""
