@@ -3,7 +3,11 @@ Coordinate Space
 
 .. _coordinate-space:
 
-A Coordinate Space (anatomical space) defines the mathematical frame in which anatomical data are expressed: origin, axis directions/orientation, physical voxel spacing/units, and (optionally) an associated reference template image. Images are considered to reside in the same Coordinate Space when they are at least affine-aligned (same orientation, origin, and scaling) to the defining template/reference.
+A Coordinate Space (anatomical space) defines the mathematical frame in which anatomical data are expressed: origin, axis directions/orientation, physical units, and (optionally) an associated reference template image. Images are considered to reside in the same Coordinate Space when they are at least affine-aligned (same orientation, origin, and scaling) to the defining template/reference.
+
+A Coordinate Space has no voxel spacing. Spacing maps pixels to physical coordinates and is a property of an image expressed in the space, such as a :doc:`template` or an annotation volume. What must agree between a template and the annotations drawn on it is their physical coordinates, not their voxels.
+
+A Coordinate Space is defined by one template, recorded in its manifest. Other templates can be aligned to the same space; each references the space from its own manifest.
 
 .. seealso::
    https://brain-bican.github.io/models/AnatomicalSpace/
@@ -52,19 +56,24 @@ Files
   * ``schema_version`` – version of the manifest contract
   * ``described_by`` – URL of the specification of this asset type
   * ``origin`` – anatomical origin of the coordinate system
-  * ``spacing`` – physical voxel spacing, including units
   * ``template`` – object (``name``, ``version``) identifying the
     template that defines the space
 
 
 Versioning
 ----------
+Coordinates in two versions of a space are directly comparable; coordinates in two different spaces are not.
+
 New space when:
 
-* The interpretation of coordinates in physical units changes (for example, a change in origin).
+* The interpretation of coordinates in physical units changes (for example, a change in origin, axis orientation, or units).
+* Species or age group changes.
 
-New version when:
+New version when the defining template changes and coordinates remain comparable:
 
-* Defining template image changes
+* The defining template gets a new version.
+* A different template becomes the defining template, for example one of another imaging modality or technique registered to the existing space.
+
+The second case is why a space is versioned separately from its template: a new template, not only a new template version, can redefine an existing space. See :ref:`template versioning <template-versioning>` for when a template is new.
 
 

@@ -23,6 +23,17 @@ _TEMPLATE_MANIFEST = {
     "created": "2015-01-01",
     "schema_version": "0.1.0",
     "described_by": described_by_url("templates"),
+    "scales": [10, 25, 50, 100],
+}
+
+_SPACE_MANIFEST = {
+    "name": "allen-adult-mouse-ccf-space",
+    "version": "2015",
+    "location": "/coordinate-spaces/allen-adult-mouse-ccf-space/2015",
+    "schema_version": "0.2.1",
+    "described_by": described_by_url("coordinate-spaces"),
+    "origin": "anterior-superior-left corner",
+    "template": {"name": "allen-adult-mouse-stpt-template", "version": "2015"},
 }
 
 
@@ -170,6 +181,35 @@ class ValidatorTest(unittest.TestCase):
             self.assertEqual(len(missing), 1)
             self.assertIn("described_by", missing[0].message)
             self.assertFalse(report.has_errors)
+
+    def test_missing_template_scales_is_warning(self):
+        """A template manifest without scales triggers W041 for that key."""
+        with tempfile.TemporaryDirectory() as root:
+            base = _valid_template(root)
+            manifest = dict(_TEMPLATE_MANIFEST)
+            del manifest["scales"]
+            _write(os.path.join(base, "manifest.json"), json.dumps(manifest))
+            report = validate(LocalStore(root))
+            missing = [f for f in report.findings if f.code == "W041"]
+            self.assertEqual(len(missing), 1)
+            self.assertIn("scales", missing[0].message)
+
+    def test_space_manifest_without_spacing_is_valid(self):
+        """A coordinate space manifest needs no spacing key."""
+        with tempfile.TemporaryDirectory() as root:
+            base = os.path.join(
+                root,
+                "coordinate-spaces",
+                "allen-adult-mouse-ccf-space",
+                "2015",
+            )
+            _write(os.path.join(base, "data_description.json"), "{}")
+            _write(
+                os.path.join(base, "manifest.json"),
+                json.dumps(_SPACE_MANIFEST),
+            )
+            report = validate(LocalStore(root))
+            self.assertEqual(report.findings, [])
 
     def test_no_version_dir_is_error(self):
         """An asset name with no version directory triggers E010."""

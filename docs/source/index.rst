@@ -55,7 +55,7 @@ An anatomical space is a versioned release of a mathematical space with a define
 
 **Also Known As:** anatomical space
 
-**Practically:** an anatomical origin and physical voxel spacing, usually with a reference image (e.g. the tissuecyte template) that defines it. The defining feature of an anatomical space is its coordinate system. Any images that are at least affine-aligned are in the same anatomical space. The anatomical template that defines the anatomical space can change, resulting in a new version of the anatomical space. Changing the coordinate system (e.g. moving the origin) defines a new space (not a new version of a space).
+**Practically:** an anatomical origin and axes in physical units, usually with a reference image (e.g. the tissuecyte template) that defines it. Voxel spacing belongs to the images in the space, not to the space. The defining feature of an anatomical space is its coordinate system. Any images that are at least affine-aligned are in the same anatomical space. The anatomical template that defines the anatomical space can change, resulting in a new version of the anatomical space. Changing the coordinate system (e.g. moving the origin) defines a new space (not a new version of a space).
 
 For implementation details (definition, naming, validation) see :doc:`coordinate_space`.
 

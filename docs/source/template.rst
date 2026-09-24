@@ -54,6 +54,8 @@ Files
       conveys the template that defined the coordinate space
     * ``schema_version`` – version of the manifest contract
     * ``described_by`` – URL of the specification of this asset type
+    * ``scales`` – list of voxel spacings (resolutions) available (e.g.
+      ``[10, 25, 50, 100]``)
 
 ``processing.json``
   * Averaging / registration methods; reference datasets
@@ -64,6 +66,8 @@ Validation Rules
 * Anatomical orientation and coordinate transformations are defined and consistent across provided formats.
 * No missing scale levels referenced by transformations.
 * The Coordinate Space referenced in ``manifest.json`` (matching name and version) must exist.
+
+.. _template-versioning:
 
 Versioning
 ----------
@@ -78,3 +82,9 @@ Define a new template when:
 
 * Species or age group changes
 * Imaging modality or technique changes
+
+Effect on the :doc:`coordinate_space`:
+
+* A new species or age group also requires a new coordinate space.
+* A new imaging modality or technique does not. The template can be aligned to an existing space, and can become that space's defining template in a new version of the space.
+* An orientation or origin change in the template that defines a space also requires a new coordinate space; other changes to that template produce a new version of the space.
