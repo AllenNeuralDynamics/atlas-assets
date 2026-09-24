@@ -9,6 +9,8 @@ This page tracks changes to the Atlas Asset Organization specification.
 
    Clarified that ``scales`` entries in template and annotation set manifests may be anisotropic: a number for isotropic spacing, or a list of per-axis spacings (e.g. for section-based atlases). OME-Zarr and NIfTI support anisotropic spacing natively.
 
+   Specified the coordinate space ``origin`` as an ``[x, y, z]`` coordinate in millimeters, measured along the space's axes from the corner of the defining template's image grid. Under ``--level full`` the validator reports ``E104`` when ``origin`` is not three numbers.
+
    Clarified coordinate space versioning. A new species or age group requires a new space. A new version of the defining template, or a different template (for example, another imaging modality) becoming the defining template, produces a new version of the space while coordinates stay comparable. The template specification now states how each template change affects its coordinate space.
 
 **v0.2.0 — September 11, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.2.0/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.2.0>`__

@@ -32,7 +32,7 @@ _SPACE_MANIFEST = {
     "location": "/coordinate-spaces/allen-adult-mouse-ccf-space/2015",
     "schema_version": "0.2.1",
     "described_by": described_by_url("coordinate-spaces"),
-    "origin": "anterior-superior-left corner",
+    "origin": [0, 0, 0],
     "template": {"name": "allen-adult-mouse-stpt-template", "version": "2015"},
 }
 
