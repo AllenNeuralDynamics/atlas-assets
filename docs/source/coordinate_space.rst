@@ -54,10 +54,9 @@ Files
   * ``schema_version`` – version of the manifest contract
   * ``described_by`` – URL of the specification of this asset type
   * ``origin`` – anatomical origin of the coordinate system, as an
-    ``[x, y, z]`` position in physical coordinates. It is measured along the
-    space's x, y and z axes from the corner of the defining template's
-    image grid (the outer corner of voxel ``[0, 0, 0]``), which is the
-    same at every scale. ``[0, 0, 0]`` places the origin at that corner.
+    ``[x, y, z]`` position in physical coordinates, measured along the
+    space's x, y and z axes from voxel ``[0, 0, 0]`` of the defining
+    template.
   * ``template`` – object (``name``, ``version``) identifying the
     template that defines the space
 
