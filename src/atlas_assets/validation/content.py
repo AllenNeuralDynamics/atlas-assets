@@ -15,6 +15,7 @@ These checks read file contents and require the ``validate`` extra:
 import csv
 import io
 import json
+import math
 import re
 from urllib.parse import urlparse
 
@@ -80,6 +81,8 @@ def check_version(store, spec, asset, files, dirs, ctx, report):
     _check_modality(store, spec, asset, files, report)
     _check_manifest_refs(store, asset, files, report)
     _check_described_by(store, spec, asset, files, report)
+    if spec.type_dir == "coordinate-spaces":
+        _check_origin(store, asset, files, report)
     if spec.type_dir == "terminologies":
         _check_terminology_csv(store, asset, files, report)
     if ctx.zarr_ok:
@@ -231,6 +234,48 @@ def _check_described_by(store, spec, asset, files, report):
             "W042",
             "described_by should point at the '{}' specification page "
             "'{}', not '{}'.".format(spec.type_dir, spec.docs_page, page),
+            asset,
+            path,
+        )
+
+
+def _is_coordinate(value):
+    """Return True if ``value`` is a list of three finite numbers."""
+    return (
+        isinstance(value, list)
+        and len(value) == 3
+        and all(
+            isinstance(v, (int, float))
+            and not isinstance(v, bool)
+            and math.isfinite(v)
+            for v in value
+        )
+    )
+
+
+def _check_origin(store, asset, files, report):
+    """Check that a coordinate space ``origin`` is an [x, y, z] point.
+
+    A missing key is reported structurally as W041; this check validates
+    the value that is there.
+    """
+    if "manifest.json" not in files:
+        return
+    path = f"{asset}/manifest.json"
+    try:
+        data = json.loads(store.read_text(path))
+    except (ValueError, OSError):
+        return  # malformed JSON is already reported in Phase 1
+    if not isinstance(data, dict) or "origin" not in data:
+        return  # a non-object (W040) or absent key (W041) is reported
+    origin = data["origin"]
+    if not _is_coordinate(origin):
+        _add(
+            report,
+            Severity.ERROR,
+            "E104",
+            "origin must be an [x, y, z] coordinate of three numbers, "
+            "not {!r}.".format(origin),
             asset,
             path,
         )

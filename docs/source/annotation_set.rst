@@ -81,7 +81,12 @@ Files
     terminology
   * ``template`` – (optional) object (``name``, ``version``) identifying
     the reference template
-  * ``scales`` – list of resolutions available (e.g. ``[10, 25, 50, 100]``)
+  * ``scales`` – (optional) list of voxel spacings (resolutions)
+    available (e.g. ``[10, 25, 50, 100]``). Each entry is a number for
+    isotropic spacing, or a list of per-axis spacings in the axis order
+    of the image for anisotropic spacing (e.g. ``[[100, 10, 10]]`` for
+    thick sections). The OME-Zarr multiscales metadata remains the
+    authoritative record of each level's spacing.
 
 ``data_description.json``
   * ``aind_data_schema >= 2.0``: includes administrative metadata, description, provenance, authorship, licensing, references

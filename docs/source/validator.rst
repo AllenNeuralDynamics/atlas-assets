@@ -79,6 +79,10 @@ With ``--level full`` the validator also reads file contents:
   version, ``latest``, ``stable`` or a self-hosted copy of the docs all
   pass. A manifest that omits ``described_by`` entirely is reported
   structurally as ``W041``, like any other missing minimal manifest key.
+* **Coordinate space origin** – a coordinate space ``manifest.json`` that
+  declares ``origin`` must give an ``[x, y, z]`` coordinate of three
+  numbers (``E104`` otherwise). A missing ``origin`` is reported
+  structurally as ``W041``.
 * **Terminology CSV** – required columns, unique ``identifier`` and
   ``annotation_value``, resolvable ``parent_identifier``, no cycles, and
   ``#RRGGBB`` color values.

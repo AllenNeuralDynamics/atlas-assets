@@ -4,6 +4,15 @@ Changelog
 
 This page tracks changes to the Atlas Asset Organization specification.
 
+**v0.2.1 — September 24, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.2.1/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.2.1>`__
+   Removed ``spacing`` from the coordinate space manifest. Voxel spacing maps pixels to physical coordinates, so it belongs to the images expressed in a space, not to the space. Added an optional ``scales`` key, the list of available voxel spacings, to the template manifest, and made ``scales`` optional in the annotation set manifest; both keys now share one definition. The OME-Zarr multiscales metadata remains the authoritative record of spacing. ``scales`` is now the only term for voxel spacing.
+
+   Clarified that ``scales`` entries in template and annotation set manifests may be anisotropic: a number for isotropic spacing, or a list of per-axis spacings (e.g. for section-based atlases). OME-Zarr and NIfTI support anisotropic spacing natively.
+
+   Specified the coordinate space ``origin`` as an ``[x, y, z]`` position in physical coordinates, measured along the space's axes from voxel ``[0, 0, 0]`` of the defining template. Under ``--level full`` the validator reports ``E104`` when ``origin`` is not three numbers.
+
+   Clarified coordinate space versioning. A new species or age group requires a new space. A new version of the defining template, or a different template (for example, another imaging modality) becoming the defining template, produces a new version of the space while coordinates stay comparable. The template specification now states how each template change affects its coordinate space.
+
 **v0.2.0 — September 11, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.2.0/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.2.0>`__
    Required a ``described_by`` field in every ``manifest.json``, holding the URL of the specification of that asset type. ``schema_version`` records which version of the manifest contract applies; ``described_by`` records where that contract is documented, so a manifest read outside its asset tree still points back to the specification.
 

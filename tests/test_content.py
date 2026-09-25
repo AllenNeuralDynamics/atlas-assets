@@ -458,6 +458,68 @@ class DescribedByTest(unittest.TestCase):
         self.assertEqual(described_by_url("atlases", "v0.2.0"), expected)
 
 
+class OriginTest(unittest.TestCase):
+    """A coordinate space origin must be an [x, y, z] coordinate."""
+
+    def _codes(self, manifest):
+        """Return content finding codes for a space with ``manifest``."""
+        with tempfile.TemporaryDirectory() as root:
+            base = os.path.join(root, "coordinate-spaces", "x-space", "2015")
+            _write(os.path.join(base, "data_description.json"), "{}")
+            _write(os.path.join(base, "manifest.json"), manifest)
+            return _run(root, "coordinate-spaces", "x-space", "2015")
+
+    def test_xyz_coordinate_passes(self):
+        """Three finite numbers are a valid origin."""
+        for value in ([0, 0, 0], [5.4, 0.44, -3.5], [1, 2.5, 3]):
+            with self.subTest(value=value):
+                manifest = json.dumps({"origin": value})
+                self.assertNotIn("E104", self._codes(manifest))
+
+    def test_malformed_origin_is_error(self):
+        """Anything other than three finite numbers yields E104."""
+        for value in (
+            "bregma",
+            [0, 0],
+            [0, 0, 0, 0],
+            [0, "1", 0],
+            [True, 0, 0],
+            {"x": 0, "y": 0, "z": 0},
+            None,
+        ):
+            with self.subTest(value=value):
+                manifest = json.dumps({"origin": value})
+                self.assertIn("E104", self._codes(manifest))
+
+    def test_non_finite_origin_is_error(self):
+        """NaN or infinite components yield E104."""
+        self.assertIn("E104", self._codes('{"origin": [NaN, 0, 0]}'))
+        self.assertIn("E104", self._codes('{"origin": [Infinity, 0, 0]}'))
+
+    def test_absent_origin_is_not_checked_here(self):
+        """A missing origin is reported structurally as W041."""
+        self.assertNotIn("E104", self._codes("{}"))
+        self.assertNotIn("E104", self._codes("[]"))
+        self.assertNotIn("E104", self._codes("{bad"))
+
+    def test_other_asset_types_are_not_checked(self):
+        """Only coordinate spaces carry an origin."""
+        with tempfile.TemporaryDirectory() as root:
+            base = os.path.join(root, "atlases", "x-atlas", "2015")
+            _write(os.path.join(base, "data_description.json"), "{}")
+            _write(os.path.join(base, "manifest.json"), '{"origin": "x"}')
+            codes = _run(root, "atlases", "x-atlas", "2015")
+            self.assertNotIn("E104", codes)
+
+    def test_missing_manifest_is_skipped(self):
+        """No manifest.json means no origin check."""
+        report = Report()
+        content_rules._check_origin(
+            None, "coordinate-spaces/x/2015", set(), report
+        )
+        self.assertEqual(report.findings, [])
+
+
 class ModalityScopeTest(unittest.TestCase):
     """Modality belongs only to asset types that are acquisitions."""
 
