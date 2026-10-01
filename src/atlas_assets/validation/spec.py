@@ -99,6 +99,7 @@ ASSET_SPECS = {
             "annotations_smooth.precomputed",
         },
         optional_files={"parcellation_volumes.csv"},
+        conditional_files={"processing.json"},
         optional_file_patterns=[
             re.compile(r"^annotations_compressed_" + _RES + r"\.nii\.gz$")
         ],

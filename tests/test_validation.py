@@ -57,6 +57,26 @@ def _valid_template(root, name="allen-adult-mouse-stpt-template"):
     return base
 
 
+def _valid_annotation_set(root, name="allen-adult-mouse-annotation"):
+    """Create a minimal valid annotation set asset under ``root``."""
+    base = os.path.join(root, "annotation-sets", name, "2017")
+    _write(os.path.join(base, "data_description.json"), "{}")
+    manifest = {
+        "name": name,
+        "version": "2017",
+        "location": f"/annotation-sets/{name}/2017",
+        "schema_version": "0.2.1",
+        "described_by": described_by_url("annotation-sets"),
+        "coordinate_space": {"name": "s", "version": "2015"},
+        "terminology": {"name": "t", "version": "2017"},
+    }
+    _write(os.path.join(base, "manifest.json"), json.dumps(manifest))
+    _write(os.path.join(base, "processing.json"), "{}")
+    for d in ("annotations.ome.zarr", "annotations.precomputed"):
+        os.makedirs(os.path.join(base, d))
+    return base
+
+
 def _valid_ct(root, name="a-template-2024_to_b-template-2015"):
     """Create a minimal coordinate-transformation asset under ``root``."""
     base = os.path.join(root, "coordinate-transformations", name, "2024")
@@ -195,28 +215,18 @@ class ValidatorTest(unittest.TestCase):
     def test_annotation_set_scales_is_optional(self):
         """An annotation set manifest without scales produces no findings."""
         with tempfile.TemporaryDirectory() as root:
-            base = os.path.join(
-                root,
-                "annotation-sets",
-                "allen-adult-mouse-annotation",
-                "2017",
-            )
-            _write(os.path.join(base, "data_description.json"), "{}")
-            manifest = {
-                "name": "allen-adult-mouse-annotation",
-                "version": "2017",
-                "location": "/annotation-sets/allen-adult-mouse-annotation"
-                "/2017",
-                "schema_version": "0.2.1",
-                "described_by": described_by_url("annotation-sets"),
-                "coordinate_space": {"name": "s", "version": "2015"},
-                "terminology": {"name": "t", "version": "2017"},
-            }
-            _write(os.path.join(base, "manifest.json"), json.dumps(manifest))
-            for d in ("annotations.ome.zarr", "annotations.precomputed"):
-                os.makedirs(os.path.join(base, d))
+            _valid_annotation_set(root)
             report = validate(LocalStore(root))
             self.assertEqual(report.findings, [])
+
+    def test_annotation_set_processing_missing_is_warning(self):
+        """An annotation set without processing.json triggers W010."""
+        with tempfile.TemporaryDirectory() as root:
+            base = _valid_annotation_set(root)
+            os.remove(os.path.join(base, "processing.json"))
+            report = validate(LocalStore(root))
+            self.assertEqual(_codes(report), {"W010"})
+            self.assertFalse(report.has_errors)
 
     def test_space_manifest_without_spacing_is_valid(self):
         """A coordinate space manifest needs no spacing key."""

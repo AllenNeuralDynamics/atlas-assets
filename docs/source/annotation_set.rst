@@ -22,6 +22,7 @@ Directory Structure
              ├── annotations.precomputed                    (REQUIRED)
              ├── annotations_smooth.precomputed             (OPTIONAL)
              ├── parcellation_volumes.csv                   (OPTIONAL)
+             ├── processing.json                            (REQUIRED if computed)
              └── manifest.json                              (REQUIRED)
 
 Naming Convention
@@ -65,6 +66,14 @@ Files
 ``parcellation_volumes.csv``
   * Documents the annotated volume for each identifier.
   * Columns: ``identifier``, ``voxel_count``, ``volume_mm3``
+
+``processing.json``
+  * ``aind_data_schema >= 2.0``
+  * Required when the annotations are computed, e.g. transformed from
+    another coordinate space.
+  * Describes how the annotations were derived: the source annotation
+    set, the coordinate transformation applied, resampling method,
+    software versions and parameters.
 
 ``manifest.json``
   Identifies the annotation set and its components. Minimal required

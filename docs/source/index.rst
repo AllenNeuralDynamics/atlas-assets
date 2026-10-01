@@ -152,6 +152,7 @@ The S3 bucket structure is organized as follows:
    │           ├── annotations.precomputed                    (REQUIRED)
    │           ├── annotations_smooth.precomputed             (OPTIONAL)
    │           ├── parcellation_volumes.csv                   (OPTIONAL)
+   │           ├── processing.json                            (REQUIRED if computed)
    │           └── manifest.json                              (REQUIRED)
    │
    ├── terminologies/
@@ -183,7 +184,7 @@ Metadata
 
 All data assets must have a data_description.json file at the top level of the asset folder that is valid according to aind-data-schema.
 
-All computed assets (e.g. some templates) must have a processing.json at the top level of the asset folder that is valid according to aind-data-schema.
+All computed assets (e.g. some templates, annotation sets transformed from another coordinate space) must have a processing.json at the top level of the asset folder that is valid according to aind-data-schema.
 
 Every ``manifest.json`` must include a ``described_by`` field holding the URL of the specification of its asset type. A manifest is often read on its own — copied out of the tree, cached in a database, embedded in a viewer — and ``described_by`` is what leads a reader back to the contract it was written against. Where ``schema_version`` records *which* version of the manifest contract applies, ``described_by`` records *where* that contract is documented. The value is the asset type's page in this specification, at the version the manifest was written against.
 
