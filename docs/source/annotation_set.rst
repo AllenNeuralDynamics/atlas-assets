@@ -16,6 +16,7 @@ Directory Structure
      └── <annotation_set_name>/
          └── <version>/
              ├── data_description.json                      (REQUIRED)
+             ├── citation.cff                               (OPTIONAL)
              ├── annotations.ome.zarr                       (REQUIRED)
              ├── annotations_compressed.ome.zarr            (OPTIONAL)
              ├── annotations_compressed_{resolution}.nii.gz (OPTIONAL)
@@ -100,6 +101,9 @@ Files
 ``data_description.json``
   * ``aind_data_schema >= 2.0``: includes administrative metadata, description, provenance, authorship, licensing, references
   * ``modalities`` must be empty. A modality records how a volume was acquired; an annotation set is a parcellation of a space, not an acquisition. The modality belongs to the template it was drawn on.
+
+``citation.cff``
+  * Optional citation metadata in Citation File Format. See :ref:`citation.cff <citation-file>`.
 
 Versioning
 ----------

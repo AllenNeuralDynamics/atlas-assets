@@ -15,7 +15,7 @@ from atlas_assets.validation import (
     validate,
 )
 from atlas_assets.validation.cli import main
-from atlas_assets.validation.spec import described_by_url
+from atlas_assets.validation.spec import ASSET_SPECS, described_by_url
 from atlas_assets.validation.store import AssetStore
 
 _TEMPLATE_MANIFEST = {
@@ -227,6 +227,20 @@ class ValidatorTest(unittest.TestCase):
             report = validate(LocalStore(root))
             self.assertEqual(_codes(report), {"W010"})
             self.assertFalse(report.has_errors)
+
+    def test_citation_cff_is_accepted(self):
+        """citation.cff in a template or annotation set raises nothing."""
+        with tempfile.TemporaryDirectory() as root:
+            for base in (_valid_template(root), _valid_annotation_set(root)):
+                _write(os.path.join(base, "citation.cff"), "cff-version: 1")
+            report = validate(LocalStore(root))
+            self.assertEqual(report.findings, [])
+
+    def test_citation_cff_is_optional_for_every_asset_type(self):
+        """Every asset type lists citation.cff as an optional file."""
+        for type_dir, spec in ASSET_SPECS.items():
+            with self.subTest(type_dir=type_dir):
+                self.assertIn("citation.cff", spec.optional_files)
 
     def test_space_manifest_without_spacing_is_valid(self):
         """A coordinate space manifest needs no spacing key."""
