@@ -131,12 +131,14 @@ The S3 bucket structure is organized as follows:
    │   └── <atlas_name>/
    │       └── <version>/
    │           ├── data_description.json                      (REQUIRED)
+   │           ├── citation.cff                               (OPTIONAL)
    │           └── manifest.json                              (REQUIRED)
    │
    ├── templates/
    │   └── <template_name>/
    │       └── <version>/
    │           ├── data_description.json                      (REQUIRED)
+   │           ├── citation.cff                               (OPTIONAL)
    │           ├── manifest.json                              (REQUIRED)
    │           ├── processing.json                            (REQUIRED if computed)
    │           ├── template.ome.zarr                          (REQUIRED)
@@ -146,18 +148,21 @@ The S3 bucket structure is organized as follows:
    │   └── <annotation_set_name>/
    │       └── <version>/
    │           ├── data_description.json                      (REQUIRED)
+   │           ├── citation.cff                               (OPTIONAL)
    │           ├── annotations.ome.zarr                       (REQUIRED)
    │           ├── annotations_compressed.ome.zarr            (OPTIONAL)
    │           ├── annotations_compressed_{resolution}.nii.gz (OPTIONAL)
    │           ├── annotations.precomputed                    (REQUIRED)
    │           ├── annotations_smooth.precomputed             (OPTIONAL)
    │           ├── parcellation_volumes.csv                   (OPTIONAL)
+   │           ├── processing.json                            (REQUIRED if computed)
    │           └── manifest.json                              (REQUIRED)
    │
    ├── terminologies/
    │   └── <terminology_name>/
    │       └── <version>/
    │           ├── data_description.json                      (REQUIRED)
+   │           ├── citation.cff                               (OPTIONAL)
    │           ├── manifest.json                              (REQUIRED)
    │           ├── terminology.parquet                        (OPTIONAL)
    │           ├── terminology.csv                            (REQUIRED)
@@ -167,12 +172,14 @@ The S3 bucket structure is organized as follows:
    │   └── <coordinate_space_name>/
    │       └── <version>/
    │           ├── data_description.json                      (REQUIRED)
+   │           ├── citation.cff                               (OPTIONAL)
    │           └── manifest.json                              (REQUIRED)
    │
    └── coordinate-transformations/
        └── <template>-<version>_to_<template>-<version>/
            └── <version>/
                ├── data_description.json                      (REQUIRED)
+               ├── citation.cff                               (OPTIONAL)
                ├── processing.json                            (REQUIRED if computed)
                ├── manifest.json                              (REQUIRED)
                ├── coordinate_transformations.ome.zarr        (OPTIONAL)
@@ -183,7 +190,11 @@ Metadata
 
 All data assets must have a data_description.json file at the top level of the asset folder that is valid according to aind-data-schema.
 
-All computed assets (e.g. some templates) must have a processing.json at the top level of the asset folder that is valid according to aind-data-schema.
+All computed assets (e.g. some templates, annotation sets transformed from another coordinate space) must have a processing.json at the top level of the asset folder that is valid according to aind-data-schema.
+
+.. _citation-file:
+
+Any asset may include a ``citation.cff`` file at the top level of the asset folder, in `Citation File Format <https://citation-file-format.github.io/>`__ (CFF) 1.2.0 or later. aind-data-schema has no structured field for a complete citation, yet some licenses require attribution and users often recognize an atlas by its publication. The top-level fields of ``citation.cff`` cite the asset itself. A ``preferred-citation`` entry names the work users should cite instead, such as the paper that introduced the atlas, and ``references`` lists related works (see `credit redirection <https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md#credit-redirection>`__).
 
 Every ``manifest.json`` must include a ``described_by`` field holding the URL of the specification of its asset type. A manifest is often read on its own — copied out of the tree, cached in a database, embedded in a viewer — and ``described_by`` is what leads a reader back to the contract it was written against. Where ``schema_version`` records *which* version of the manifest contract applies, ``described_by`` records *where* that contract is documented. The value is the asset type's page in this specification, at the version the manifest was written against.
 

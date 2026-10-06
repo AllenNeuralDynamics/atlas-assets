@@ -16,6 +16,7 @@ Directory Structure
      └── <template_name>/
          └── <version>/
              ├── data_description.json        (REQUIRED)
+             ├── citation.cff                 (OPTIONAL)
              ├── manifest.json                (REQUIRED)
              ├── processing.json              (REQUIRED if computed)
              ├── template.ome.zarr            (REQUIRED)
@@ -46,6 +47,9 @@ Files
 
 ``data_description.json``
   * ``aind_data_schema >= 2.0``
+
+``citation.cff``
+  * Optional citation metadata in Citation File Format. See :ref:`citation.cff <citation-file>`.
 
 ``manifest.json``
   * References the Coordinate Space this template defines or is aligned to. Minimal required keys (draft):

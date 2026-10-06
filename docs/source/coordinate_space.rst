@@ -20,6 +20,7 @@ Subset of the global layout showing only the coordinate space content:
      └── <coordinate_space_name>/
          └── <version>/
              ├── data_description.json (REQUIRED)
+             ├── citation.cff          (OPTIONAL)
              └── manifest.json         (REQUIRED)
 
 
@@ -44,6 +45,9 @@ Files
   Must validate against ``aind_data_schema >= 2.0``. Documents administrative metadata.
 
   ``modalities`` must be empty. A modality records how a volume was acquired; a coordinate space is a mathematical space, not an acquisition.
+
+``citation.cff``
+  Optional citation metadata in Citation File Format. See :ref:`citation.cff <citation-file>`.
 
 ``manifest.json``
   Documents the coordinate space. Minimal required keys (draft):

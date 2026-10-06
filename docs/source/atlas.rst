@@ -18,6 +18,7 @@ Subset of the global layout:
      └── <atlas_name>/
          └── <version>/
              ├── data_description.json (REQUIRED)
+             ├── citation.cff          (OPTIONAL)
              └── manifest.json         (REQUIRED)
 
 Naming Convention
@@ -42,7 +43,10 @@ Examples:
 Files
 -----
 ``data_description.json``
-  Must validate against ``aind_data_schema >= 2.0``. Records provenance, creators, high-level description, citation.
+  Must validate against ``aind_data_schema >= 2.0``. Records provenance, creators, high-level description.
+
+``citation.cff``
+  Optional citation metadata in Citation File Format, for the atlas and any publication users should cite. See :ref:`citation.cff <citation-file>`.
 
 ``manifest.json``
   Canonical reference list to component assets. Minimal required keys (draft):

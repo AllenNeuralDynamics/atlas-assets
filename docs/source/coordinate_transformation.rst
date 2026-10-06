@@ -21,6 +21,7 @@ Follows the pattern shown in the global layout (subset repeated here):
      └── <source_template>-<source_version>_to_<target_template>-<target_version>/
          └── <version>/
              ├── data_description.json               (REQUIRED)
+             ├── citation.cff                        (OPTIONAL)
              ├── processing.json                     (REQUIRED if computed)
              ├── manifest.json                       (REQUIRED)
              ├── coordinate_transformations.ome.zarr (OPTIONAL)
@@ -49,6 +50,9 @@ Files
   * Conforms to ``aind_data_schema >= 2.0``.
   * ``modalities`` must be empty. A transformation is a mapping between spaces, not an acquisition.
   * Describes purpose, provenance, authorship, licensing, source & target references.
+
+``citation.cff``
+  * Optional citation metadata in Citation File Format. See :ref:`citation.cff <citation-file>`.
 
 ``processing.json``
   * Pipeline steps (e.g. preprocessing, affine registration, nonlinear warp), software versions, parameters.

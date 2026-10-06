@@ -16,12 +16,14 @@ Directory Structure
      └── <annotation_set_name>/
          └── <version>/
              ├── data_description.json                      (REQUIRED)
+             ├── citation.cff                               (OPTIONAL)
              ├── annotations.ome.zarr                       (REQUIRED)
              ├── annotations_compressed.ome.zarr            (OPTIONAL)
              ├── annotations_compressed_{resolution}.nii.gz (OPTIONAL)
              ├── annotations.precomputed                    (REQUIRED)
              ├── annotations_smooth.precomputed             (OPTIONAL)
              ├── parcellation_volumes.csv                   (OPTIONAL)
+             ├── processing.json                            (REQUIRED if computed)
              └── manifest.json                              (REQUIRED)
 
 Naming Convention
@@ -66,6 +68,14 @@ Files
   * Documents the annotated volume for each identifier.
   * Columns: ``identifier``, ``voxel_count``, ``volume_mm3``
 
+``processing.json``
+  * ``aind_data_schema >= 2.0``
+  * Required when the annotations are computed, e.g. transformed from
+    another coordinate space.
+  * Describes how the annotations were derived: the source annotation
+    set, the coordinate transformation applied, resampling method,
+    software versions and parameters.
+
 ``manifest.json``
   Identifies the annotation set and its components. Minimal required
   keys (draft):
@@ -91,6 +101,9 @@ Files
 ``data_description.json``
   * ``aind_data_schema >= 2.0``: includes administrative metadata, description, provenance, authorship, licensing, references
   * ``modalities`` must be empty. A modality records how a volume was acquired; an annotation set is a parcellation of a space, not an acquisition. The modality belongs to the template it was drawn on.
+
+``citation.cff``
+  * Optional citation metadata in Citation File Format. See :ref:`citation.cff <citation-file>`.
 
 Versioning
 ----------

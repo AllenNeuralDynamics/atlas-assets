@@ -15,7 +15,7 @@ from atlas_assets.validation import (
     validate,
 )
 from atlas_assets.validation.cli import main
-from atlas_assets.validation.spec import described_by_url
+from atlas_assets.validation.spec import ASSET_SPECS, described_by_url
 from atlas_assets.validation.store import AssetStore
 
 _TEMPLATE_MANIFEST = {
@@ -54,6 +54,26 @@ def _valid_template(root, name="allen-adult-mouse-stpt-template"):
     )
     _write(os.path.join(base, "processing.json"), "{}")
     os.makedirs(os.path.join(base, "template.ome.zarr"), exist_ok=True)
+    return base
+
+
+def _valid_annotation_set(root, name="allen-adult-mouse-annotation"):
+    """Create a minimal valid annotation set asset under ``root``."""
+    base = os.path.join(root, "annotation-sets", name, "2017")
+    _write(os.path.join(base, "data_description.json"), "{}")
+    manifest = {
+        "name": name,
+        "version": "2017",
+        "location": f"/annotation-sets/{name}/2017",
+        "schema_version": "0.2.1",
+        "described_by": described_by_url("annotation-sets"),
+        "coordinate_space": {"name": "s", "version": "2015"},
+        "terminology": {"name": "t", "version": "2017"},
+    }
+    _write(os.path.join(base, "manifest.json"), json.dumps(manifest))
+    _write(os.path.join(base, "processing.json"), "{}")
+    for d in ("annotations.ome.zarr", "annotations.precomputed"):
+        os.makedirs(os.path.join(base, d))
     return base
 
 
@@ -195,28 +215,32 @@ class ValidatorTest(unittest.TestCase):
     def test_annotation_set_scales_is_optional(self):
         """An annotation set manifest without scales produces no findings."""
         with tempfile.TemporaryDirectory() as root:
-            base = os.path.join(
-                root,
-                "annotation-sets",
-                "allen-adult-mouse-annotation",
-                "2017",
-            )
-            _write(os.path.join(base, "data_description.json"), "{}")
-            manifest = {
-                "name": "allen-adult-mouse-annotation",
-                "version": "2017",
-                "location": "/annotation-sets/allen-adult-mouse-annotation"
-                "/2017",
-                "schema_version": "0.2.1",
-                "described_by": described_by_url("annotation-sets"),
-                "coordinate_space": {"name": "s", "version": "2015"},
-                "terminology": {"name": "t", "version": "2017"},
-            }
-            _write(os.path.join(base, "manifest.json"), json.dumps(manifest))
-            for d in ("annotations.ome.zarr", "annotations.precomputed"):
-                os.makedirs(os.path.join(base, d))
+            _valid_annotation_set(root)
             report = validate(LocalStore(root))
             self.assertEqual(report.findings, [])
+
+    def test_annotation_set_processing_missing_is_warning(self):
+        """An annotation set without processing.json triggers W010."""
+        with tempfile.TemporaryDirectory() as root:
+            base = _valid_annotation_set(root)
+            os.remove(os.path.join(base, "processing.json"))
+            report = validate(LocalStore(root))
+            self.assertEqual(_codes(report), {"W010"})
+            self.assertFalse(report.has_errors)
+
+    def test_citation_cff_is_accepted(self):
+        """citation.cff in a template or annotation set raises nothing."""
+        with tempfile.TemporaryDirectory() as root:
+            for base in (_valid_template(root), _valid_annotation_set(root)):
+                _write(os.path.join(base, "citation.cff"), "cff-version: 1")
+            report = validate(LocalStore(root))
+            self.assertEqual(report.findings, [])
+
+    def test_citation_cff_is_optional_for_every_asset_type(self):
+        """Every asset type lists citation.cff as an optional file."""
+        for type_dir, spec in ASSET_SPECS.items():
+            with self.subTest(type_dir=type_dir):
+                self.assertIn("citation.cff", spec.optional_files)
 
     def test_space_manifest_without_spacing_is_valid(self):
         """A coordinate space manifest needs no spacing key."""

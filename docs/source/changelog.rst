@@ -4,6 +4,11 @@ Changelog
 
 This page tracks changes to the Atlas Asset Organization specification.
 
+**v0.2.2 — October 1, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.2.2/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.2.2>`__
+   Added ``processing.json`` to the annotation set specification, required if the annotation set is computed (for example, annotations transformed from another coordinate space). It describes how the annotations were derived. As for templates and coordinate transformations, the validator reports ``W010`` when it is absent, since whether an asset is computed cannot be determined structurally, and under ``--level full`` validates it against aind-data-schema.
+
+   Added an optional ``citation.cff`` file, in Citation File Format, to every asset type (`#58 <https://github.com/AllenNeuralDynamics/atlas-assets/issues/58>`__). aind-data-schema has no structured field for a complete citation. ``citation.cff`` cites the asset itself and can redirect credit to a publication through ``preferred-citation``. The atlas specification no longer states that ``data_description.json`` records the citation.
+
 **v0.2.1 — September 24, 2026** — `HTML <https://atlas-assets.readthedocs.io/en/v0.2.1/>`__ · `GitHub <https://github.com/AllenNeuralDynamics/atlas-assets/releases/tag/v0.2.1>`__
    Removed ``spacing`` from the coordinate space manifest. Voxel spacing maps pixels to physical coordinates, so it belongs to the images expressed in a space, not to the space. Added an optional ``scales`` key, the list of available voxel spacings, to the template manifest, and made ``scales`` optional in the annotation set manifest; both keys now share one definition. The OME-Zarr multiscales metadata remains the authoritative record of spacing. ``scales`` is now the only term for voxel spacing.
 

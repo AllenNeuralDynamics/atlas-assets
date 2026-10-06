@@ -20,6 +20,7 @@ Only the terminology subtree of the global layout is shown here:
      └── <terminology_name>/
          └── <version>/
              ├── data_description.json (REQUIRED)
+             ├── citation.cff          (OPTIONAL)
              ├── manifest.json         (REQUIRED)
              ├── terminology.csv       (REQUIRED)
              ├── terminology.parquet   (OPTIONAL)
@@ -49,6 +50,9 @@ Files
 ``data_description.json``
   * Must validate against ``aind_data_schema >= 2.0``. Documents provenance, authorship, license, and high-level context.
   * ``modalities`` must be empty. A terminology is a vocabulary, not an acquisition.
+
+``citation.cff``
+  * Optional citation metadata in Citation File Format. See :ref:`citation.cff <citation-file>`.
 
 ``manifest.json``
   Identifies the terminology release. Minimal required keys (draft):

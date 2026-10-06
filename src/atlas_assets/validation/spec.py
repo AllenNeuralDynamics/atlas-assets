@@ -25,6 +25,10 @@ DOCS_BASE_URL = "https://atlas-assets.readthedocs.io/en"
 # or a ``v``-prefixed tag.
 VERSION_RE = re.compile(r"^(\d{4}(-\d{2})?|\d+\.\d+\.\d+|v\d+.*)$")
 
+# Optional files permitted in every asset type, e.g. a Citation File
+# Format record citing the asset and any publication to cite instead.
+COMMON_OPTIONAL_FILES = frozenset({"citation.cff"})
+
 
 @dataclass(frozen=True)
 class AssetSpec:
@@ -62,6 +66,7 @@ ASSET_SPECS = {
     "atlases": AssetSpec(
         type_dir="atlases",
         required_files={"data_description.json", "manifest.json"},
+        optional_files=set(COMMON_OPTIONAL_FILES),
         manifest_keys={
             "coordinate_space",
             "templates",
@@ -76,6 +81,7 @@ ASSET_SPECS = {
     "templates": AssetSpec(
         type_dir="templates",
         required_files={"data_description.json", "manifest.json"},
+        optional_files=set(COMMON_OPTIONAL_FILES),
         required_dirs={"template.ome.zarr"},
         conditional_files={"processing.json"},
         optional_file_patterns=[
@@ -98,7 +104,8 @@ ASSET_SPECS = {
             "annotations_compressed.ome.zarr",
             "annotations_smooth.precomputed",
         },
-        optional_files={"parcellation_volumes.csv"},
+        optional_files={"parcellation_volumes.csv"} | COMMON_OPTIONAL_FILES,
+        conditional_files={"processing.json"},
         optional_file_patterns=[
             re.compile(r"^annotations_compressed_" + _RES + r"\.nii\.gz$")
         ],
@@ -121,7 +128,7 @@ ASSET_SPECS = {
             "manifest.json",
             "terminology.csv",
         },
-        optional_files={"terminology.parquet"},
+        optional_files={"terminology.parquet"} | COMMON_OPTIONAL_FILES,
         optional_dirs={"legacy_files"},
         manifest_keys={
             "name",
@@ -136,6 +143,7 @@ ASSET_SPECS = {
     "coordinate-spaces": AssetSpec(
         type_dir="coordinate-spaces",
         required_files={"data_description.json", "manifest.json"},
+        optional_files=set(COMMON_OPTIONAL_FILES),
         manifest_keys={
             "name",
             "version",
@@ -151,6 +159,7 @@ ASSET_SPECS = {
     "coordinate-transformations": AssetSpec(
         type_dir="coordinate-transformations",
         required_files={"data_description.json", "manifest.json"},
+        optional_files=set(COMMON_OPTIONAL_FILES),
         conditional_files={"processing.json"},
         optional_dirs={"coordinate_transformations.ome.zarr"},
         manifest_keys={
