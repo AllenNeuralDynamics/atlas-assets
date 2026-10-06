@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from typing import List
 from urllib.parse import urlparse
 
-# Default AWS region for AIND buckets; overridable via environment.
+# Default AWS region for Allen Institute buckets; overridable via environment.
 _DEFAULT_REGION = "us-west-2"
 
 
@@ -145,8 +145,8 @@ class S3Store(_ObstoreStore):
         """Create a store for an ``s3://bucket/prefix`` URI.
 
         The region defaults to ``$AWS_REGION`` / ``$AWS_DEFAULT_REGION``
-        and then to AIND's ``us-west-2``. Requests are unsigned so that
-        public buckets can be read without credentials.
+        and then to the Allen Institute's ``us-west-2``. Requests are
+        unsigned so that public buckets can be read without credentials.
         """
         obstore = _require_obstore()
         parsed = urlparse(uri)

@@ -8,7 +8,7 @@ from datetime import date
 
 from atlas_assets import __version__ as package_version
 
-INSTITUTE_NAME = "Allen Institute for Neural Dynamics"
+INSTITUTE_NAME = "Allen Institute"
 
 current_year = date.today().year
 
